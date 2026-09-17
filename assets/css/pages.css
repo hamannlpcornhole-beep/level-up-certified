@@ -170,3 +170,12 @@
 .dash .tabs{padding-bottom:4px}
 .dash-kpi b.amber{color:var(--amber)} .dash-kpi b.red{color:var(--red)} .dash-kpi b.green{color:var(--green)}
 .ladder h3{letter-spacing:.01em}
+.speed-board{width:min(220px,60vw); height:auto}
+#spdBag,#spdTrail{transition:transform .5s var(--ease-out), d .5s var(--ease-out)}
+.dir .link{justify-self:start}
+.kit-list{list-style:none; display:grid; gap:10px; margin-top:14px}
+.kit-list li{display:flex; gap:10px; align-items:flex-start; color:var(--text-2)}
+.kit-list svg{width:18px; height:18px; color:var(--orange); flex-shrink:0; margin-top:2px}
+.prize .card-icon{margin-bottom:0}
+.kit .link{justify-self:start}
+@media print{ .nav,.footer,.dock,.demo-pill,.cta-band,.subnav{display:none!important} body{background:#fff; color:#000} .rules-doc details{border-color:#ccc} .draft-banner{border-color:#999} }

@@ -4,38 +4,133 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Training Center | Level Up Certified</title>
-<meta name="description" content="The one-stop certification for cornhole players. Rules, etiquette, gear and how to play. $1. Good for a year.">
+<meta name="description" content="Start here. A beginner path, free drills, a PPR tracker and coaching from ACL pros.">
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#08080A">
 <meta name="color-scheme" content="dark">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Level Up Certified">
-<meta property="og:description" content="Rules. Etiquette. Gear. How to play. Get certified for $1.">
-<meta property="og:image" content="../assets/img/og.jpg">
+<meta property="og:title" content="Level Up Training Center">
+<meta property="og:description" content="A beginner path, free drills and coaching from ACL pros.">
+<meta property="og:image" content="https://hamannlpcornhole-beep.github.io/level-up-certified/assets/img/og-certified.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="manifest" href="../manifest.webmanifest">
 <link rel="icon" type="image/png" href="../assets/img/icon.png">
-<link rel="apple-touch-icon" href="../assets/img/icon.png">
+<link rel="apple-touch-icon" href="../assets/img/icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;0,900;1,800;1,900&family=Barlow:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/css/site.css">
+<link rel="stylesheet" href="../assets/css/pages.css">
 <script>document.documentElement.classList.add('js')</script>
 </head>
 <body data-page="training">
 <div data-nav></div>
 <main id="main">
+
   <section class="page-hero">
-    <div class="rings"><i></i><i></i><i></i><i></i><i></i></div>
-    <div class="bg-word">Training</div>
+    <div class="rings" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="bg-word" aria-hidden="true">Train</div>
     <div class="wrap">
-      <nav class="crumbs"><a href="../">Home</a><i></i><span>Training Center</span></nav>
-      <h1 class="display h-1">Start Here</h1>
-      <p class="lead">A beginner path, free drills, and coaching when you want more.</p>
-      <div class="actions"><span class="chip chip-orange"><i class="dot"></i> Building this page right now</span></div>
+      <nav class="crumbs"><a href="../">Home</a><i></i><span>Training center</span></nav>
+      <h1 class="display h-1">Start <span class="grad">here.</span></h1>
+      <p class="lead">A path from your first bag to your first bracket. Free drills, a stat tracker, and coaching from ACL pros when you want to go faster.</p>
+      <div class="actions">
+        <a class="btn btn-primary btn-lg" id="fypTop" href="#" target="_blank" rel="noopener">Find your program <i data-icon="arrow"></i></a>
+        <a class="btn btn-ghost btn-lg" href="#drills">Free drills</a>
+      </div>
     </div>
   </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="sec-head" data-reveal>
+        <span class="kicker">The path</span>
+        <h2 class="display h-2">Four stages. <span class="grad">In order.</span></h2>
+        <p class="lead">Most players skip stage one and wonder why they plateau. Don't be most players.</p>
+      </div>
+      <div class="grid g-4" data-stagger="0.08" id="roadmap"></div>
+    </div>
+  </section>
+
+  <section class="section alt line-top" id="drills">
+    <div class="wrap">
+      <div class="sec-head row">
+        <div class="stack-lg" data-reveal>
+          <span class="kicker">Free drills</span>
+          <h2 class="display h-2">Tip of the week <span class="grad">library.</span></h2>
+        </div>
+        <p class="lead" data-reveal="right">Short clips from the Level Up coaches. Video slots are ready and filling in as they get posted.</p>
+      </div>
+      <div class="dirbar"><div class="chips" id="drillChips"></div></div>
+      <div class="grid g-3" id="drillGrid" data-stagger="0.05"></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="split">
+        <div class="stack-lg" data-reveal="left">
+          <span class="kicker">Track it</span>
+          <h2 class="display h-2">Your <span class="grad">PPR.</span></h2>
+          <p class="lead">PPR is points per round. Count every point you put up, before cancellation, and divide by the rounds you played. It's the number players use to size each other up, and the ACL rolls PPR and DPR into its player rating.</p>
+          <p class="text-2">Log a session after league night and watch the line move. This saves on your phone only.</p>
+        </div>
+        <div class="calc" data-reveal="right">
+          <div class="form-row">
+            <div class="field"><label class="label" for="tPts">Points scored</label><input class="input mono" id="tPts" type="number" min="0" inputmode="numeric" placeholder="60"></div>
+            <div class="field"><label class="label" for="tRounds">Rounds played</label><input class="input mono" id="tRounds" type="number" min="1" inputmode="numeric" placeholder="10"></div>
+          </div>
+          <button class="btn btn-primary btn-sm" type="button" id="tAdd">Log this session</button>
+          <div class="ppr-stats">
+            <div><span class="mono tiny muted">Latest</span><b id="tLatest">0.0</b></div>
+            <div><span class="mono tiny muted">Average</span><b id="tAvg">0.0</b></div>
+            <div><span class="mono tiny muted">Best</span><b id="tBest">0.0</b></div>
+          </div>
+          <svg class="spark" id="spark" viewBox="0 0 300 90" preserveAspectRatio="none" aria-hidden="true">
+            <defs><linearGradient id="sparkGrad" x1="0" x2="1"><stop offset="0" stop-color="#F36C21"/><stop offset="1" stop-color="#FFB23F"/></linearGradient></defs>
+            <path class="fill" d=""></path><path d=""></path>
+          </svg>
+          <div class="row between"><span class="mono tiny muted" id="tCount">No sessions yet</span><button class="link small muted" type="button" id="tClear">Clear</button></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt line-top">
+    <div class="wrap">
+      <div class="sec-head center" data-reveal>
+        <span class="kicker">Coaching</span>
+        <h2 class="display h-2">Train with <span class="grad">ACL pros.</span></h2>
+        <p class="lead">When free drills stop moving the needle, this is the next step.</p>
+      </div>
+      <div class="grid g-3" id="programs" data-stagger="0.07"></div>
+      <p class="center mt-24"><a class="link" id="fypLink" href="#" target="_blank" rel="noopener">Not sure which one? Take the 5 question quiz <i data-icon="arrow"></i></a></p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="sec-head" data-reveal>
+        <span class="kicker">The coaches</span>
+        <h2 class="display h-2">Who you'd <span class="grad">work with.</span></h2>
+      </div>
+      <div class="grid g-4" id="coaches" data-stagger="0.06"></div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="cta-bg"><img src="../assets/img/band-results.jpg" alt="" loading="lazy"></div>
+    <div class="wrap" data-reveal>
+      <span class="kicker plain">Training center</span>
+      <h2 class="display it mt-16">Learn the game.<br><span class="grad">Then go get better.</span></h2>
+      <div class="actions">
+        <a class="btn btn-primary btn-xl" href="../certify/">Get Certified <span class="tag" data-price>$1</span> <i data-icon="arrow"></i></a>
+      </div>
+    </div>
+  </section>
+
 </main>
 <div data-footer></div>
 <script type="module" src="../assets/js/site.js"></script>
+<script type="module" src="../assets/js/pages/training.js"></script>
 </body>
 </html>

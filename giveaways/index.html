@@ -4,38 +4,138 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Giveaways | Level Up Certified</title>
-<meta name="description" content="The one-stop certification for cornhole players. Rules, etiquette, gear and how to play. $1. Good for a year.">
+<meta name="description" content="Every Level Up Certified player is entered in giveaways all year. No purchase necessary.">
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#08080A">
 <meta name="color-scheme" content="dark">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Level Up Certified">
-<meta property="og:description" content="Rules. Etiquette. Gear. How to play. Get certified for $1.">
-<meta property="og:image" content="../assets/img/og.jpg">
+<meta property="og:title" content="Level Up Certified giveaways">
+<meta property="og:description" content="Certified players are entered all year. No purchase necessary.">
+<meta property="og:image" content="https://hamannlpcornhole-beep.github.io/level-up-certified/assets/img/og-certified.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="manifest" href="../manifest.webmanifest">
 <link rel="icon" type="image/png" href="../assets/img/icon.png">
-<link rel="apple-touch-icon" href="../assets/img/icon.png">
+<link rel="apple-touch-icon" href="../assets/img/icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;0,900;1,800;1,900&family=Barlow:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/css/site.css">
+<link rel="stylesheet" href="../assets/css/pages.css">
 <script>document.documentElement.classList.add('js')</script>
 </head>
 <body data-page="giveaways">
 <div data-nav></div>
 <main id="main">
+
   <section class="page-hero">
-    <div class="rings"><i></i><i></i><i></i><i></i><i></i></div>
-    <div class="bg-word">Giveaways</div>
+    <div class="rings" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="bg-word" aria-hidden="true">Win</div>
     <div class="wrap">
       <nav class="crumbs"><a href="../">Home</a><i></i><span>Giveaways</span></nav>
-      <h1 class="display h-1">Certified Players Win Stuff</h1>
-      <p class="lead">Upcoming drawings, prizes and the official rules.</p>
-      <div class="actions"><span class="chip chip-orange"><i class="dot"></i> Building this page right now</span></div>
+      <h1 class="display h-1">Certified players <span class="grad">win stuff.</span></h1>
+      <p class="lead">Get certified and you're entered in Level Up giveaways all year. Bags, gear, coaching and more.</p>
+      <div class="row wrap-row mt-24"><span class="chip"><i data-icon="calendar"></i> Next drawing</span><span class="chip chip-orange">Sample date</span></div>
+      <div class="countdown mt-16" id="countdown">
+        <div><b data-cd="d">00</b><span>Days</span></div>
+        <div><b data-cd="h">00</b><span>Hours</span></div>
+        <div><b data-cd="m">00</b><span>Min</span></div>
+        <div><b data-cd="s">00</b><span>Sec</span></div>
+      </div>
+      <div class="actions">
+        <a class="btn btn-primary btn-lg" href="../certify/">Get Certified <span class="tag" data-price>$1</span> <i data-icon="arrow"></i></a>
+        <a class="btn btn-ghost btn-lg" href="#free-entry">Free entry</a>
+      </div>
     </div>
   </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="sec-head center" data-reveal>
+        <span class="kicker">How entries work</span>
+        <h2 class="display h-2">Three ways <span class="grad">in.</span></h2>
+      </div>
+      <div class="grid g-3" data-stagger="0.07">
+        <div class="card"><span class="card-icon"><i data-icon="shield"></i></span><h3 class="card-title">Get certified</h3><p class="card-text">Finish the course and your entry is automatic. No forms, no hoops.</p></div>
+        <div class="card"><span class="card-icon"><i data-icon="refresh"></i></span><h3 class="card-title">Stay certified</h3><p class="card-text">Your entry rides all year. Renew and you keep rolling into the next drawings.</p></div>
+        <div class="card"><span class="card-icon"><i data-icon="mail"></i></span><h3 class="card-title">Free entry</h3><p class="card-text">No purchase necessary. Use the free entry form below and get the same odds.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt line-top">
+    <div class="wrap">
+      <div class="sec-head" data-reveal>
+        <span class="kicker">The calendar</span>
+        <h2 class="display h-2">When we <span class="grad">draw.</span></h2>
+        <p class="lead">Four drawings a year. Dates get locked in before launch.</p>
+      </div>
+      <div class="timeline" id="calendar" data-allow-overflow></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="sec-head row">
+        <div class="stack-lg" data-reveal><span class="kicker">The prizes</span><h2 class="display h-2">What's on <span class="grad">the table.</span></h2></div>
+        <p class="lead" data-reveal="right">Examples of what a drawing can include. The real prize list gets posted before each drawing.</p>
+      </div>
+      <div class="grid g-3" id="prizes" data-stagger="0.06"></div>
+    </div>
+  </section>
+
+  <section class="section alt line-top" id="free-entry">
+    <div class="wrap wrap-narrow">
+      <div class="sec-head center" data-reveal>
+        <span class="kicker">No purchase necessary</span>
+        <h2 class="display h-2">Free entry.</h2>
+        <p class="lead">You do not have to buy anything to enter. Fill this out and you're in the next drawing with the same odds as certified players.</p>
+      </div>
+      <form class="form glass" id="freeForm" style="padding:26px; border-radius:var(--r-xl)" novalidate>
+        <div class="form-row">
+          <div class="field"><label class="label" for="fName">Name</label><input class="input" id="fName" required></div>
+          <div class="field"><label class="label" for="fEmail">Email</label><input class="input" id="fEmail" type="email" required></div>
+        </div>
+        <div class="field"><label class="label" for="fState">State</label><select class="select" id="fState"></select></div>
+        <label class="check"><input type="checkbox" id="fAge" required><span>I'm 18 or older, or I have a parent's permission.</span></label>
+        <p class="err hide" id="freeErr"></p>
+        <button class="btn btn-primary btn-lg btn-block" type="submit">Enter the drawing</button>
+        <p class="hint center">Demo mode. Nothing is stored or sent from this test site.</p>
+      </form>
+      <div id="freeResult"></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="sec-head center" data-reveal><span class="kicker">Winners</span><h2 class="display h-2">The wall.</h2></div>
+      <div class="card center" data-reveal>
+        <span class="card-icon" style="margin-inline:auto"><i data-icon="trophy"></i></span>
+        <h3 class="card-title">No winners yet</h3>
+        <p class="card-text">Winners get posted right here after the first drawing, with their first name and their league.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt line-top" id="rules">
+    <div class="wrap wrap-narrow">
+      <div class="sec-head" data-reveal><span class="kicker">Official rules</span><h2 class="display h-2">The fine <span class="grad">print.</span></h2></div>
+      <div class="draft-banner" data-reveal><i data-icon="alert"></i><div><b>Draft. Needs legal review before launch.</b><br>This is a starting template, not legal advice. A lawyer should check it before any real giveaway runs. Anything in brackets still needs filling in.</div></div>
+      <div class="rules-doc mt-24" id="rulesDoc"></div>
+      <div class="row wrap-row mt-16"><button class="btn btn-ghost btn-sm" type="button" id="printRules"><i data-icon="printer"></i> Print the rules</button></div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="cta-bg"><img src="../assets/img/band-cta.jpg" alt="" loading="lazy"></div>
+    <div class="wrap" data-reveal>
+      <span class="kicker plain">Giveaways</span>
+      <h2 class="display it mt-16">Get certified.<br><span class="grad">Get entered.</span></h2>
+      <div class="actions"><a class="btn btn-primary btn-xl" href="../certify/">Get Certified <span class="tag" data-price>$1</span> <i data-icon="arrow"></i></a></div>
+    </div>
+  </section>
+
 </main>
 <div data-footer></div>
 <script type="module" src="../assets/js/site.js"></script>
+<script type="module" src="../assets/js/pages/giveaways.js"></script>
 </body>
 </html>

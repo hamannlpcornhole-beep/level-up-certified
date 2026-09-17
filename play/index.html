@@ -4,38 +4,155 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Where to Play | Level Up Certified</title>
-<meta name="description" content="The one-stop certification for cornhole players. Rules, etiquette, gear and how to play. $1. Good for a year.">
+<meta name="description" content="Find leagues, tournaments and ACL events, plus the apps players use to check in.">
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#08080A">
 <meta name="color-scheme" content="dark">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Level Up Certified">
-<meta property="og:description" content="Rules. Etiquette. Gear. How to play. Get certified for $1.">
-<meta property="og:image" content="../assets/img/og.jpg">
+<meta property="og:title" content="Where to play cornhole">
+<meta property="og:description" content="From backyard to Worlds. Leagues, tournaments and the apps that find them.">
+<meta property="og:image" content="https://hamannlpcornhole-beep.github.io/level-up-certified/assets/img/og-certified.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="manifest" href="../manifest.webmanifest">
 <link rel="icon" type="image/png" href="../assets/img/icon.png">
-<link rel="apple-touch-icon" href="../assets/img/icon.png">
+<link rel="apple-touch-icon" href="../assets/img/icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;0,900;1,800;1,900&family=Barlow:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/css/site.css">
+<link rel="stylesheet" href="../assets/css/pages.css">
 <script>document.documentElement.classList.add('js')</script>
 </head>
 <body data-page="play">
 <div data-nav></div>
 <main id="main">
+
   <section class="page-hero">
-    <div class="rings"><i></i><i></i><i></i><i></i><i></i></div>
-    <div class="bg-word">Where</div>
+    <div class="rings" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="bg-word" aria-hidden="true">Play</div>
     <div class="wrap">
-      <nav class="crumbs"><a href="../">Home</a><i></i><span>Where to Play</span></nav>
-      <h1 class="display h-1">Find Your Boards</h1>
-      <p class="lead">Leagues, tournaments and the apps that find them.</p>
-      <div class="actions"><span class="chip chip-orange"><i class="dot"></i> Building this page right now</span></div>
+      <nav class="crumbs"><a href="../">Home</a><i></i><span>Where to play</span></nav>
+      <h1 class="display h-1">Find your <span class="grad">boards.</span></h1>
+      <p class="lead">Backyard, bar league, local tournament, ACL events. Here's the ladder, and here's how to find the next rung near you.</p>
+      <div class="actions">
+        <a class="btn btn-primary btn-lg" href="https://www.iplaycornhole.com/events" target="_blank" rel="noopener">Find an ACL event <i data-icon="arrowUpRight"></i></a>
+        <a class="btn btn-ghost btn-lg" href="../certify/">Get certified first</a>
+      </div>
     </div>
   </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="sec-head" data-reveal>
+        <span class="kicker">The ladder</span>
+        <h2 class="display h-2">Backyard to <span class="grad">Worlds.</span></h2>
+        <p class="lead">Nobody starts at the top. Here's what each level looks like and what you need before you show up.</p>
+      </div>
+      <ol class="ladder" id="ladder"></ol>
+    </div>
+  </section>
+
+  <section class="section alt line-top">
+    <div class="wrap">
+      <div class="split">
+        <div class="stack-lg" data-reveal="left">
+          <span class="kicker">League finder</span>
+          <h2 class="display h-2">Level Up Certified leagues</h2>
+          <p class="lead">Partner leagues are signing up now. Drop in your city and we'll tell you the second one opens near you.</p>
+          <form class="form" id="findForm">
+            <div class="field"><label class="label" for="city">City or zip</label><input class="input" id="city" placeholder="Denver, CO" autocomplete="address-level2"></div>
+            <button class="btn btn-primary" type="submit">Look it up <i data-icon="search"></i></button>
+          </form>
+          <div id="findResult"></div>
+          <p class="hint">Run a league? <a class="link" href="../leagues/">Get your league listed</a></p>
+        </div>
+        <div data-reveal="right">
+          <div class="radar" aria-hidden="true"><i></i><i></i><i></i></div>
+          <p class="hint center mt-16">Partner league map coming soon. No fake pins here.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="sec-head" data-reveal>
+        <span class="kicker">Find a game now</span>
+        <h2 class="display h-2">Where events <span class="grad">actually live.</span></h2>
+        <p class="lead">These are the places players check every week. ACL, ACO and ACA are three separate organizations with similar names, so make sure you're signing up for the right one.</p>
+      </div>
+      <div class="grid g-2" data-stagger="0.07">
+        <a class="card hover" href="https://www.iplaycornhole.com/events" target="_blank" rel="noopener"><span class="card-icon"><i data-icon="calendar"></i></span><h3 class="card-title">ACL event finder</h3><p class="card-text">Search ACL sanctioned events by location, from local points nights up to national events.</p></a>
+        <a class="card hover" href="https://scoreholio.com/getting-started/" target="_blank" rel="noopener"><span class="card-icon"><i data-icon="phone"></i></span><h3 class="card-title">Scoreholio</h3><p class="card-text">A ton of local tournaments run here. Find a tournament, check in with a QR code, watch the bracket.</p></a>
+        <a class="card hover" href="https://americancornhole.com/events/" target="_blank" rel="noopener"><span class="card-icon"><i data-icon="flag"></i></span><h3 class="card-title">ACO events</h3><p class="card-text">The American Cornhole Organization runs its own regionals, majors and championships.</p></a>
+        <a class="card hover" href="https://www.playcornhole.org/" target="_blank" rel="noopener"><span class="card-icon"><i data-icon="globe"></i></span><h3 class="card-title">ACA</h3><p class="card-text">The American Cornhole Association, another national body running its own events.</p></a>
+      </div>
+      <p class="placeholder-note mt-24"><i data-icon="info"></i> <span>Local bars and breweries run leagues that never show up in any app. Ask around, check Facebook groups, and look for boards in the corner.</span></p>
+    </div>
+  </section>
+
+  <section class="section alt line-top">
+    <div class="wrap">
+      <div class="sec-head center" data-reveal>
+        <span class="kicker">Apps</span>
+        <h2 class="display h-2">Download these <span class="grad">before you go.</span></h2>
+      </div>
+      <div class="grid g-2" data-stagger="0.08">
+        <div class="app-tile">
+          <div class="top"><span class="glyph"><i data-icon="target"></i></span><div><h3 class="display h-4">The Cornhole App</h3><span class="mono tiny orange">Official ACL app</span></div></div>
+          <p class="text-2">Keep score, track your stats, find ACL events and sign up for them. Free to download, and some features need an ACL membership.</p>
+          <div class="row wrap-row">
+            <a class="btn btn-ghost btn-sm" href="https://apps.apple.com/us/app/cornhole-app/id6752613073" target="_blank" rel="noopener">iPhone</a>
+            <a class="btn btn-ghost btn-sm" href="https://play.google.com/store/apps/details?id=com.aclapp.mobile" target="_blank" rel="noopener">Android</a>
+          </div>
+        </div>
+        <div class="app-tile">
+          <div class="top"><span class="glyph"><i data-icon="listChecks"></i></span><div><h3 class="display h-4">Scoreholio</h3><span class="mono tiny orange">League and tournament nights</span></div></div>
+          <p class="text-2">Check in with a QR code, see your bracket, and get told which board to go to. Free, with an optional paid stats upgrade.</p>
+          <div class="row wrap-row">
+            <a class="btn btn-ghost btn-sm" href="https://apps.apple.com/us/app/scoreholio/id1370777926" target="_blank" rel="noopener">iPhone</a>
+            <a class="btn btn-ghost btn-sm" href="https://play.google.com/store/apps/details?id=com.scoreholio.android" target="_blank" rel="noopener">Android</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="split">
+        <div class="stack-lg" data-reveal="left">
+          <span class="kicker">Your first night</span>
+          <h2 class="display h-2">Walk in like <span class="grad">you've done it.</span></h2>
+          <ul class="perk-list">
+            <li><i data-icon="clock"></i><span>Get there early and check in with the director or in the app</span></li>
+            <li><i data-icon="users"></i><span>Know the format: blind draw, bring your partner, or singles</span></li>
+            <li><i data-icon="target"></i><span>Warm up only on open boards, never on a board in a game</span></li>
+            <li><i data-icon="listChecks"></i><span>Call the score every round and report it right after</span></li>
+          </ul>
+          <a class="btn btn-primary" href="../certify/#/m/league-night">See the full rundown <i data-icon="arrow"></i></a>
+        </div>
+        <div data-reveal="right">
+          <div class="card"><h3 class="card-title">Bring this</h3>
+            <ul class="kit-list" id="bringList"></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="cta-bg"><img src="../assets/img/hero.jpg" alt="" loading="lazy" style="object-position:50% 25%"></div>
+    <div class="wrap" data-reveal>
+      <span class="kicker plain">Where to play</span>
+      <h2 class="display it mt-16">Run a league?<br><span class="grad">Make it certified.</span></h2>
+      <p class="lead">Partner leagues get a check-in scanner, a QR poster and a share of every certification.</p>
+      <div class="actions"><a class="btn btn-primary btn-xl" href="../leagues/">Partner with Level Up <i data-icon="arrow"></i></a></div>
+    </div>
+  </section>
+
 </main>
 <div data-footer></div>
 <script type="module" src="../assets/js/site.js"></script>
+<script type="module" src="../assets/js/pages/play.js"></script>
 </body>
 </html>
