@@ -615,9 +615,9 @@ body.modal-open{overflow:hidden}
   content:""; position:absolute; inset:0; z-index:6; border-radius:inherit; padding:1.5px; pointer-events:none;
   background:linear-gradient(150deg, rgba(255,178,63,.95), rgba(243,108,33,.25) 30%, rgba(122,243,255,.35) 55%, rgba(255,122,224,.35) 75%, rgba(255,178,63,.9));
   -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0); -webkit-mask-composite:xor; mask-composite:exclude}
-.holo-foil{position:absolute; inset:0; z-index:4; pointer-events:none; mix-blend-mode:color-dodge; opacity:calc(.12 + var(--hover) * .38);
+.holo-foil{position:absolute; inset:0; z-index:4; pointer-events:none; mix-blend-mode:color-dodge; opacity:calc(.06 + var(--hover) * .26);
   background:
-    repeating-linear-gradient(118deg, rgba(255,122,224,.9) 0%, rgba(122,243,255,.9) 8%, rgba(255,233,122,.9) 16%, rgba(122,255,170,.9) 24%, rgba(255,122,224,.9) 32%),
+    repeating-linear-gradient(118deg, rgba(255,138,43,.9) 0%, rgba(255,122,224,.85) 8%, rgba(122,243,255,.85) 16%, rgba(255,210,120,.9) 24%, rgba(255,138,43,.9) 32%),
     repeating-linear-gradient(28deg, rgba(0,0,0,.6) 0 2px, transparent 2px 5px);
   background-size:400% 400%, 100% 100%; background-position:var(--mx) var(--my), 0 0; background-blend-mode:overlay;
   -webkit-mask-image:linear-gradient(180deg, #000 0%, rgba(0,0,0,.45) 55%, #000 100%); mask-image:linear-gradient(180deg, #000 0%, rgba(0,0,0,.45) 55%, #000 100%); transition:opacity .4s}
