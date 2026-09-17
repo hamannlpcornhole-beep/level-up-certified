@@ -335,11 +335,11 @@ export function startHero({ canvas, container, logoUrl, onScore, onRound, onRead
     if (w / h > 1.05) {
       camera.fov = 30;
       camera.setViewOffset(w, h, -w * 0.21, h * 0.02, w, h);
-      camBase.set(3.2, 3.4, 6.8); camLook.set(0.05, 0.5, -0.5);
+      camBase.set(3.5, 3.5, 7.9); camLook.set(0.05, 0.38, -0.62);
     } else {
       camera.fov = 36;
-      camera.setViewOffset(w, h, 0, h * 0.23, w, h);
-      camBase.set(2.3, 4.1, 8.6); camLook.set(0, 0.45, -0.45);
+      camera.setViewOffset(w, h, 0, h * 0.26, w, h);
+      camBase.set(2.6, 5.4, 11.2); camLook.set(0, 0.3, -0.5);
     }
     camera.updateProjectionMatrix();
   }

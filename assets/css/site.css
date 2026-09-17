@@ -92,7 +92,7 @@ body::after{ /* film grain over everything */
 /* 3 · TYPE ------------------------------------------------------------ */
 .display{font-family:var(--display); font-weight:900; text-transform:uppercase; line-height:.88; letter-spacing:-.005em}
 .display.it,.it{font-style:italic}
-.h-hero{font-size:clamp(62px,10.6vw,164px)}
+.h-hero{font-size:clamp(60px,9.2vw,146px)}
 .h-1{font-size:clamp(50px,7.4vw,108px)}
 .h-2{font-size:clamp(42px,5.8vw,80px)}
 .h-3{font-size:clamp(32px,3.6vw,48px)}
@@ -350,7 +350,8 @@ body.dock-on .demo-pill{bottom:92px}
 }
 .hero-inner{position:relative; z-index:2; width:100%; padding-top:calc(var(--nav-h) + 40vh); padding-bottom:56px}
 @media (min-width:980px){ .hero-inner{padding-top:calc(var(--nav-h) + 40px); padding-bottom:80px} }
-.hero-copy{max-width:720px}
+.hero-copy{max-width:900px}
+.hero-copy .lead{max-width:560px}
 .hero h1{margin-top:18px}
 .hero h1 .line{display:block; overflow:hidden; padding-bottom:.04em}
 .hero h1 .line > span{display:inline-block; transform:translateY(105%); animation:rise 1s var(--ease-out) forwards}
