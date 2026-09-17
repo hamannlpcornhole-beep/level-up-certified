@@ -44,18 +44,51 @@ if (cd) {
   tick(); setInterval(tick, 1000);
 }
 
-/* 3D hero */
+/* 3D hero with a broadcast scorebug */
 const hero = document.getElementById('hero');
 const canvas = document.getElementById('heroCanvas');
 const popLayer = document.getElementById('popLayer');
-const hudScore = document.getElementById('hudScore');
-const hudBags = document.getElementById('hudBags');
+const sb = document.getElementById('scorebug');
+const TEAMS = { o: 'Level Up', w: 'Challengers' };
+const sbq = (sel) => (sb ? sb.querySelector(sel) : null);
+let bagCount = { o: 0, w: 0 };
+
+function setShot(text) {
+  const el = sbq('[data-sb="shot"]');
+  if (!el) return;
+  el.textContent = text;
+  el.classList.remove('is-new');
+  void el.offsetWidth;
+  el.classList.add('is-new');
+}
+
+function setScore(team, value) {
+  const el = sbq(`[data-score="${team}"]`);
+  if (!el || el.textContent === String(value)) return;
+  el.textContent = String(value);
+  el.classList.remove('is-bump');
+  void el.offsetWidth;
+  el.classList.add('is-bump');
+}
+
+function resetBugRound(round) {
+  bagCount = { o: 0, w: 0 };
+  const r = sbq('[data-sb="round"]');
+  if (r) r.textContent = String(round);
+  ['o', 'w'].forEach((t) => {
+    const pts = sbq(`[data-pts="${t}"]`);
+    if (pts) pts.textContent = '0';
+    sb?.querySelectorAll(`[data-bags="${t}"] i`).forEach((i) => { i.className = ''; });
+  });
+}
 
 function pop(text, x, y, big = false) {
+  if (!popLayer) return;
   const el = document.createElement('div');
   el.className = `score-pop${big ? ' big' : ''}`;
   el.textContent = text;
-  el.style.left = `${x}px`; el.style.top = `${y}px`;
+  el.style.left = `${x}px`;
+  el.style.top = `${y}px`;
   popLayer.appendChild(el);
   setTimeout(() => el.remove(), 1200);
 }
@@ -66,29 +99,42 @@ function webglOk() {
 
 if (hero && canvas && webglOk()) {
   import('./hero3d.js').then(({ startHero }) => {
-    let shown = 0;
     const api = startHero({
       canvas,
       container: hero,
       logoUrl: url('assets/img/logo.png'),
       onReady: () => hero.classList.add('has-3d'),
-      onRound: ({ phase, fourBagger }) => {
-        if (phase === 'start') {
-          shown = 0; hudScore.textContent = '0';
-          hudBags.querySelectorAll('i').forEach((i) => { i.className = ''; });
+      onRound: ({ phase, round, winner, diff, match, gameOver }) => {
+        if (phase === 'start') { resetBugRound(round); setShot('Round under way'); return; }
+        if (phase === 'end') {
+          if (winner) {
+            setScore(winner, match[winner]);
+            setShot(`${TEAMS[winner]} scores ${diff}`);
+            const row = sb?.querySelector(`.sb-row[data-team="${winner}"]`);
+            row?.classList.add('is-hot');
+            setTimeout(() => row?.classList.remove('is-hot'), 2200);
+          } else {
+            setShot('Wash. Nobody scores.');
+          }
+          if (gameOver) return;
+          return;
         }
-        if (phase === 'end' && fourBagger) {
+        if (phase === 'game') {
+          setShot(`Game. ${TEAMS[winner]} takes it.`);
           const r = hero.getBoundingClientRect();
-          pop('Four bagger!', r.width * (r.width > 980 ? 0.7 : 0.5), r.height * (r.width > 980 ? 0.28 : 0.2), true);
+          pop('Game!', r.width * (r.width > 980 ? 0.62 : 0.5), r.height * (r.width > 980 ? 0.42 : 0.3), true);
+          setTimeout(() => { setScore('o', 0); setScore('w', 0); setShot('New game. First to 21.'); }, 2600);
         }
       },
-      onScore: ({ pts, kind, index, total, screen }) => {
-        const bag = hudBags.querySelectorAll('i')[index];
-        if (bag) bag.className = kind === 'in' ? 'in' : 'on';
-        const from = shown; const to = total; const t0 = performance.now();
-        const run = (t) => { const p = Math.min(1, (t - t0) / 400); hudScore.textContent = String(Math.round(from + (to - from) * p)); if (p < 1) requestAnimationFrame(run); };
-        requestAnimationFrame(run); shown = total;
-        pop(`+${pts}`, screen.x, screen.y, kind === 'in');
+      onScore: ({ team, pts, kind, shot, roundPts, screen }) => {
+        const dots = sb?.querySelectorAll(`[data-bags="${team}"] i`);
+        const dot = dots && dots[bagCount[team]];
+        if (dot) dot.className = kind;
+        bagCount[team] = Math.min(3, bagCount[team] + 1);
+        const ptsEl = sbq(`[data-pts="${team}"]`);
+        if (ptsEl) ptsEl.textContent = String(roundPts[team]);
+        setShot(`${TEAMS[team]} ${shot}${pts ? ` +${pts}` : ' no score'}`);
+        if (pts) pop(`+${pts}`, screen.x, screen.y, kind === 'in');
       },
     });
     if (!api) hero.classList.remove('has-3d');

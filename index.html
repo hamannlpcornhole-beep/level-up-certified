@@ -45,14 +45,27 @@
     <div class="hero-shade"></div>
 
     <div class="hero-hud" aria-hidden="true">
-      <div class="hud-box">
-        <span class="lbl"><i class="dot"></i> Live round</span>
-        <span class="val tabular"><span id="hudScore">0</span><small>PTS</small></span>
-        <div class="hud-bags" id="hudBags"><i></i><i></i><i></i><i></i></div>
-      </div>
-      <div class="hud-box hud-spec">
-        <span class="lbl">Regulation</span>
-        <span class="val">27<small>FT</small></span>
+      <div class="scorebug" id="scorebug">
+        <div class="sb-head">
+          <span class="sb-live"><i></i> Live</span>
+          <span class="sb-event">Level Up Certified Open</span>
+          <span class="sb-rd">RD <b data-sb="round">1</b></span>
+        </div>
+        <div class="sb-row" data-team="o">
+          <span class="sb-flag"></span>
+          <span class="sb-name">Level Up</span>
+          <span class="sb-bags" data-bags="o"><i></i><i></i><i></i><i></i></span>
+          <span class="sb-pts" data-pts="o">0</span>
+          <span class="sb-score" data-score="o">0</span>
+        </div>
+        <div class="sb-row" data-team="w">
+          <span class="sb-flag"></span>
+          <span class="sb-name">Challengers</span>
+          <span class="sb-bags" data-bags="w"><i></i><i></i><i></i><i></i></span>
+          <span class="sb-pts" data-pts="w">0</span>
+          <span class="sb-score" data-score="w">0</span>
+        </div>
+        <div class="sb-foot"><span class="sb-shot" data-sb="shot">Cancellation scoring</span><span class="sb-tag">Game to 21</span></div>
       </div>
     </div>
     <div id="popLayer" aria-hidden="true"></div>
