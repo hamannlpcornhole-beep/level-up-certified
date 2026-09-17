@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Level Up Certified | The Cornhole Player Certification</title>
+<meta name="description" content="The one-stop certification for cornhole players. Rules, etiquette, gear and how to play. $1. Good for a year.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#08080A">
+<meta name="color-scheme" content="dark">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Level Up Certified">
+<meta property="og:description" content="Rules. Etiquette. Gear. How to play. Get certified for $1.">
+<meta property="og:image" content="assets/img/og.jpg">
+<link rel="icon" type="image/png" href="assets/img/icon.png">
+<link rel="apple-touch-icon" href="assets/img/icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;0,900;1,800;1,900&family=Barlow:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css">
+<script>document.documentElement.classList.add('js')</script>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"}}</script>
+</head>
+<body data-page="home">
+<div data-nav></div>
+
+<main id="main">
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-fallback"></div>
+    <div class="hero-grid-floor"></div>
+    <canvas class="hero-canvas" id="heroCanvas" aria-hidden="true"></canvas>
+    <div class="hero-shade"></div>
+
+    <div class="hero-hud" aria-hidden="true">
+      <div class="hud-box">
+        <span class="lbl"><i class="dot"></i> Live round</span>
+        <span class="val tabular"><span id="hudScore">0</span><small>PTS</small></span>
+        <div class="hud-bags" id="hudBags"><i></i><i></i><i></i><i></i></div>
+      </div>
+      <div class="hud-box hud-spec">
+        <span class="lbl">Regulation</span>
+        <span class="val">27<small>FT</small></span>
+      </div>
+    </div>
+    <div id="popLayer" aria-hidden="true"></div>
+
+    <div class="wrap hero-inner">
+      <div class="hero-copy">
+        <div class="row wrap-row fade-in">
+          <span class="chip"><i class="dot"></i> <span data-season>2026/27</span> season is open</span>
+          <span class="chip chip-orange league-chip"><i data-icon="flag"></i> Required by <b data-league-name></b></span>
+        </div>
+        <h1 class="display h-hero">
+          <span class="line"><span>Get Level Up</span></span>
+          <span class="line"><span class="grad">Certified</span></span>
+        </h1>
+        <p class="lead fade-in d1">The one-stop course every cornhole player needs. Rules, etiquette, gear and how to play. Finish it and you're certified for the year.</p>
+        <div class="hero-cta fade-in d2">
+          <a class="btn btn-primary btn-lg" href="certify/" data-magnetic>Get Certified <span class="tag" data-price>$1</span> <i data-icon="arrow"></i></a>
+          <a class="btn btn-ghost btn-lg" href="#inside">See what's inside</a>
+        </div>
+        <div class="hero-meta fade-in d3">
+          <span><i data-icon="clock"></i> About 35 min</span>
+          <span><i data-icon="layers"></i> 11 modules</span>
+          <span><i data-icon="qr"></i> Player card + QR</span>
+          <span><i data-icon="gift"></i> Giveaway entries</span>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-cue" aria-hidden="true"><i></i>Scroll</div>
+  </section>
+
+  <!-- TICKER -->
+  <div class="ticker-clip" aria-hidden="true">
+    <div class="ticker">
+      <div class="ticker-track">
+        <span>Know the rules</span><span>Respect the boards</span><span>Call your own fouls</span><span>Play like you belong</span><span>Level up</span>
+        <span>Know the rules</span><span>Respect the boards</span><span>Call your own fouls</span><span>Play like you belong</span><span>Level up</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUICK FACTS -->
+  <section class="section tight">
+    <div class="wrap">
+      <div class="stats" data-stagger>
+        <div class="stat"><b data-count="1" data-prefix="$">$1</b><span>One dollar. That's the whole cost.</span></div>
+        <div class="stat"><b data-count="11">11</b><span>Short modules with video</span></div>
+        <div class="stat"><b data-count="35" data-suffix=" MIN">35 MIN</b><span>Go at your own pace</span></div>
+        <div class="stat"><b data-count="365">365</b><span>Days you stay certified</span></div>
+      </div>
+      <p class="acl-line mt-32" data-acl><i data-icon="shield"></i> Built by the Official Training Program of the American Cornhole League</p>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section alt line-top" id="how">
+    <div class="wrap">
+      <div class="sec-head" data-reveal>
+        <span class="kicker">How it works</span>
+        <h2 class="display h-2">Three steps. <span class="grad">That's it.</span></h2>
+      </div>
+      <div class="steps" data-stagger="0.1">
+        <div class="step">
+          <span class="step-ico"><i data-icon="dollar"></i></span>
+          <span class="num">01</span>
+          <h3>Pay <span data-price>$1</span></h3>
+          <p>Sign up and pay one dollar. No subscription. No upsell to get your card.</p>
+        </div>
+        <div class="step">
+          <span class="step-ico"><i data-icon="play"></i></span>
+          <span class="num">02</span>
+          <h3>Go through it</h3>
+          <p>Rules, etiquette, gear, apps and how to play. Short videos from Level Up pros. Stop and pick back up anytime.</p>
+        </div>
+        <div class="step is-final">
+          <span class="step-ico"><i data-icon="shield"></i></span>
+          <span class="num">03</span>
+          <h3>Tap done. Get certified.</h3>
+          <p>Finish every module, tap I'm Done, and your player card unlocks. Good for one year.</p>
+        </div>
+      </div>
+      <p class="muted mt-24 row" style="gap:10px"><i data-icon="refresh"></i> Renew every year to stay certified and stay in the giveaways.</p>
+    </div>
+  </section>
+
+  <!-- WHAT'S INSIDE -->
+  <section class="section" id="inside">
+    <div class="wrap">
+      <div class="sec-head row">
+        <div class="stack-lg" data-reveal>
+          <span class="kicker">The course</span>
+          <h2 class="display h-2">Everything you need. <span class="grad">One place.</span></h2>
+        </div>
+        <p class="lead" data-reveal="right">Eleven short modules. Each one has a video, the stuff you actually need to know, and something to try. Built so a first-timer can walk into league night ready.</p>
+      </div>
+      <div class="mods" id="modGrid" data-stagger="0.05"></div>
+    </div>
+  </section>
+
+  <!-- THE CARD -->
+  <section class="section alt line-top ov-hidden" id="card">
+    <div class="wrap">
+      <div class="split">
+        <div class="stack-lg" data-reveal="left">
+          <span class="kicker">Your player card</span>
+          <h2 class="display h-2">Proof you <span class="grad">know the game.</span></h2>
+          <p class="lead">Finish the course and you get a digital player card with your own ID and QR code. Leagues scan it at check-in. It tilts. It shines. It's yours for the season.</p>
+          <ul class="stack" style="list-style:none">
+            <li class="row"><span class="card-icon" style="margin:0;width:40px;height:40px;border-radius:11px"><i data-icon="hash"></i></span><span>Your own certification ID</span></li>
+            <li class="row"><span class="card-icon" style="margin:0;width:40px;height:40px;border-radius:11px"><i data-icon="qr"></i></span><span>QR code leagues scan at check-in</span></li>
+            <li class="row"><span class="card-icon" style="margin:0;width:40px;height:40px;border-radius:11px"><i data-icon="gift"></i></span><span>Entered in Level Up giveaways all year</span></li>
+            <li class="row"><span class="card-icon" style="margin:0;width:40px;height:40px;border-radius:11px"><i data-icon="download"></i></span><span>Download it, share it, save it to your phone</span></li>
+          </ul>
+          <div class="row wrap-row mt-8">
+            <a class="btn btn-primary btn-lg" href="certify/">Get my card <i data-icon="arrow"></i></a>
+            <a class="btn btn-ghost btn-lg" href="verify/?id=LU-26-DEMO01">Try the verify page</a>
+          </div>
+        </div>
+        <div data-reveal="zoom">
+          <div class="holo-stage">
+            <div class="orbit"></div>
+            <div id="showcaseCard"></div>
+          </div>
+          <p class="holo-hint"><i data-icon="sparkles"></i> Move your mouse or tilt your phone. Tap to flip.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE HUB -->
+  <section class="section" id="hub">
+    <div class="wrap">
+      <div class="sec-head row">
+        <div class="stack-lg" data-reveal>
+          <span class="kicker">The hub</span>
+          <h2 class="display h-2">Roam the whole site. <span class="grad">Free.</span></h2>
+        </div>
+        <p class="lead" data-reveal="right">Certification is <span data-price>$1</span>. Everything else is right here whenever you need it. Gear, places to play, training and more.</p>
+      </div>
+      <div class="tiles" data-stagger="0.08">
+        <a class="tile" href="gear/">
+          <div class="tile-bg"><img src="assets/img/band-cta.jpg" alt="" loading="lazy"></div>
+          <span class="chip tile-tag"><i data-icon="bag"></i> Gear guide</span>
+          <span class="tile-arrow"><i data-icon="arrowUpRight"></i></span>
+          <h3>Bags &amp; Boards</h3>
+          <p>Who makes what, what the ACL Pro stamp means, and what to buy first.</p>
+          <div class="tile-list"><span class="badge muted">Bags</span><span class="badge muted">Boards</span><span class="badge muted">Starter kits</span></div>
+        </a>
+        <a class="tile" href="play/">
+          <div class="tile-bg"><img src="assets/img/hero.jpg" alt="" loading="lazy" style="object-position:50% 25%"></div>
+          <span class="chip tile-tag"><i data-icon="mapPin"></i> Where to play</span>
+          <span class="tile-arrow"><i data-icon="arrowUpRight"></i></span>
+          <h3>Find your boards</h3>
+          <p>Leagues, tournaments and the apps that find them. From backyard to Worlds.</p>
+          <div class="tile-list"><span class="badge muted">Leagues</span><span class="badge muted">Tournaments</span><span class="badge muted">ACL events</span></div>
+        </a>
+        <a class="tile" href="training/">
+          <div class="tile-bg"><img src="assets/img/action-richard.jpg" alt="" loading="lazy" style="object-position:50% 30%"></div>
+          <span class="chip tile-tag"><i data-icon="dumbbell"></i> Training center</span>
+          <span class="tile-arrow"><i data-icon="arrowUpRight"></i></span>
+          <h3>Start here</h3>
+          <p>A beginner path, free drills, and coaching from ACL pros when you want more.</p>
+          <div class="tile-list"><span class="badge muted">Beginner path</span><span class="badge muted">Drills</span><span class="badge muted">Coaching</span></div>
+        </a>
+        <a class="tile" href="leagues/">
+          <div class="tile-bg"><img src="assets/img/action-colin.jpg" alt="" loading="lazy" style="object-position:50% 30%"></div>
+          <span class="chip tile-tag"><i data-icon="users"></i> For leagues</span>
+          <span class="tile-arrow"><i data-icon="arrowUpRight"></i></span>
+          <h3>Run a league?</h3>
+          <p>Make it Level Up Certified. Scan players in, see your roster, earn from every player.</p>
+          <div class="tile-list"><span class="badge muted">Check-in scanner</span><span class="badge muted">Revenue share</span><span class="badge muted">Toolkit</span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOR LEAGUES -->
+  <section class="section alt line-top ov-hidden" id="leagues">
+    <div class="glow-orb" style="width:700px;height:700px;left:-300px;top:10%"></div>
+    <div class="wrap">
+      <div class="split wide-right">
+        <div data-reveal="left" class="rel">
+          <div class="dash">
+            <div class="dash-bar"><i></i><i></i><i></i><span class="url">levelup certified / league dashboard</span></div>
+            <span class="badge sample-note">Sample data</span>
+            <div class="dash-body">
+              <div class="dash-kpis">
+                <div class="dash-kpi"><span>Certified</span><b class="tabular" data-count="48">48</b></div>
+                <div class="dash-kpi"><span>Checked in</span><b class="tabular green" data-count="22">22</b></div>
+                <div class="dash-kpi"><span>Renew soon</span><b class="tabular amber" data-count="3">3</b></div>
+              </div>
+              <div class="dash-table">
+                <div class="dash-row"><span>Player</span><span>Cert ID</span><span>Status</span></div>
+                <div class="dash-row"><span class="who"><span class="av">JC</span>J. Carter</span><span class="id">LU-26-7KQ4MX</span><span class="badge green">Verified</span></div>
+                <div class="dash-row"><span class="who"><span class="av">ML</span>M. Lopez</span><span class="id">LU-26-3HT9PW</span><span class="badge green">Verified</span></div>
+                <div class="dash-row"><span class="who"><span class="av">TN</span>T. Nguyen</span><span class="id">LU-25-R8C2ND</span><span class="badge">Renew soon</span></div>
+                <div class="dash-row"><span class="who"><span class="av">AB</span>A. Brooks</span><span class="id">LU-26-Z4V6KE</span><span class="badge green">Verified</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="stack-lg" data-reveal="right">
+          <span class="kicker">For leagues</span>
+          <h2 class="display h-2">Your league. <span class="grad">Leveled up.</span></h2>
+          <p class="lead">Require certification and every player shows up knowing the rules. Fewer arguments. Faster nights. And your league earns from every player who certifies.</p>
+          <div class="grid g-2">
+            <div class="row" style="align-items:flex-start"><i data-icon="scan" class="orange"></i><span>Scan players in at check-in</span></div>
+            <div class="row" style="align-items:flex-start"><i data-icon="users" class="orange"></i><span>See your certified roster</span></div>
+            <div class="row" style="align-items:flex-start"><i data-icon="percent" class="orange"></i><span>Earn a share of every certification</span></div>
+            <div class="row" style="align-items:flex-start"><i data-icon="printer" class="orange"></i><span>QR posters and an announcement kit</span></div>
+          </div>
+          <div class="row wrap-row mt-8">
+            <a class="btn btn-primary btn-lg" href="leagues/">Partner with Level Up <i data-icon="arrow"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GIVEAWAYS -->
+  <section class="section" id="giveaways">
+    <div class="wrap">
+      <div class="sec-head center" data-reveal>
+        <span class="kicker">Giveaways</span>
+        <h2 class="display h-2">Certified players <span class="grad">win stuff.</span></h2>
+        <p class="lead">Every certified player gets entered in Level Up giveaways all year. Bags, gear, coaching and more.</p>
+      </div>
+      <div class="stack-lg" style="justify-items:center" data-reveal>
+        <span class="chip"><i data-icon="calendar"></i> Next drawing <b>&middot;</b> <span class="amber">sample date</span></span>
+        <div class="countdown" id="countdown">
+          <div><b data-cd="d">00</b><span>Days</span></div>
+          <div><b data-cd="h">00</b><span>Hours</span></div>
+          <div><b data-cd="m">00</b><span>Min</span></div>
+          <div><b data-cd="s">00</b><span>Sec</span></div>
+        </div>
+      </div>
+      <div class="grid g-3 mt-48" data-stagger="0.08">
+        <div class="card hover">
+          <div class="row between"><span class="card-icon"><i data-icon="bag"></i></span><span class="badge muted">Example prize</span></div>
+          <h3 class="card-title">Level Up x BG bags</h3>
+          <p class="card-text">A set of the ACL Pro stamped collab bags.</p>
+        </div>
+        <div class="card hover">
+          <div class="row between"><span class="card-icon"><i data-icon="grad"></i></span><span class="badge muted">Example prize</span></div>
+          <h3 class="card-title">A month of coaching</h3>
+          <p class="card-text">Train with a Level Up pro for a month.</p>
+        </div>
+        <div class="card hover">
+          <div class="row between"><span class="card-icon"><i data-icon="star"></i></span><span class="badge muted">Example prize</span></div>
+          <h3 class="card-title">Level Up apparel</h3>
+          <p class="card-text">Tees, hoodies and hats from the Level Up shop.</p>
+        </div>
+      </div>
+      <p class="center muted small mt-24">No purchase necessary to enter. <a class="link" href="giveaways/">How giveaways work <i data-icon="arrow"></i></a></p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section alt line-top" id="faq">
+    <div class="wrap wrap-narrow">
+      <div class="sec-head center" data-reveal>
+        <span class="kicker">FAQ</span>
+        <h2 class="display h-2">Questions? <span class="grad">Answers.</span></h2>
+      </div>
+      <div class="faq" data-stagger="0.05">
+        <details><summary>What is Level Up Certified?</summary><div class="faq-body"><p>A short online course that covers everything a cornhole player should know. Rules, etiquette, gear, apps and how to play. Finish it and you get a player card that proves it.</p></div></details>
+        <details><summary>How much is it?</summary><div class="faq-body"><p><span data-price>$1</span>. That covers the full course, your player card and your giveaway entries for the year.</p></div></details>
+        <details><summary>How long does it take?</summary><div class="faq-body"><p>About 35 minutes. Your progress saves, so you can stop and pick back up anytime.</p></div></details>
+        <details><summary>Do I have to renew?</summary><div class="faq-body"><p>Yes. Certification lasts one year. Renew to stay certified and stay in the giveaways.</p></div></details>
+        <details><summary>My league requires it. How do they check?</summary><div class="faq-body"><p>Your card has a QR code and a certification ID. Your league scans the code or types the ID on the verify page and gets a yes or no right away.</p></div></details>
+        <details><summary>Whose rules does it teach?</summary><div class="faq-body"><p>Official ACL rules, explained in plain English. Your league might add house rules on top, so always check with your director.</p></div></details>
+        <details><summary>Is it just for beginners?</summary><div class="faq-body"><p>It's built so new players can jump right in. But plenty of experienced players pick up something new in the rules and etiquette modules.</p></div></details>
+        <details><summary>Can I use the rest of the site without paying?</summary><div class="faq-body"><p>Yep. The gear guide, where to play, the training center and the verify page are all free.</p></div></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="cta-band">
+    <div class="cta-bg"><img src="assets/img/band-results.jpg" alt="" loading="lazy"></div>
+    <div class="wrap" data-reveal>
+      <span class="kicker plain">Level Up Certified</span>
+      <h2 class="display it mt-16">Know the game.<br><span class="grad">Play like it.</span></h2>
+      <p class="lead">One dollar. About 35 minutes. Good for the whole year.</p>
+      <div class="actions">
+        <a class="btn btn-primary btn-xl" href="certify/" data-magnetic>Get Certified <span class="tag" data-price>$1</span> <i data-icon="arrow"></i></a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<div data-footer></div>
+
+<script type="module" src="assets/js/site.js"></script>
+<script type="module" src="assets/js/home.js"></script>
+</body>
+</html>
