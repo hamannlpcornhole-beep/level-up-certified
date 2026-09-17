@@ -343,7 +343,7 @@ body.dock-on .demo-pill{bottom:92px}
   background-size:64px 64px; -webkit-mask-image:linear-gradient(to top, #000 10%, transparent 80%); mask-image:linear-gradient(to top, #000 10%, transparent 80%)}
 .hero.has-3d .hero-grid-floor{display:none}
 .hero-shade{position:absolute; inset:0; z-index:1; pointer-events:none;
-  background:linear-gradient(180deg, rgba(8,8,10,.55) 0%, rgba(8,8,10,0) 22%, rgba(8,8,10,0) 42%, rgba(8,8,10,.82) 70%, var(--ink) 96%)}
+  background:linear-gradient(180deg, rgba(8,8,10,.6) 0%, rgba(8,8,10,.1) 18%, rgba(8,8,10,.25) 38%, rgba(8,8,10,.9) 58%, var(--ink) 88%)}
 @media (min-width:980px){
   .hero{align-items:center}
   .hero-shade{background:linear-gradient(90deg, rgba(8,8,10,.92) 0%, rgba(8,8,10,.55) 34%, rgba(8,8,10,0) 58%), linear-gradient(180deg, rgba(8,8,10,.5) 0%, rgba(8,8,10,0) 20%, rgba(8,8,10,0) 76%, var(--ink) 100%)}

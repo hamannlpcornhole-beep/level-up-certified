@@ -4,38 +4,39 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>The Course | Level Up Certified</title>
-<meta name="description" content="The one-stop certification for cornhole players. Rules, etiquette, gear and how to play. $1. Good for a year.">
+<meta name="description" content="Pay $1, go through the course, tap I'm Done and get your Level Up Certified player card.">
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#08080A">
 <meta name="color-scheme" content="dark">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Level Up Certified">
-<meta property="og:description" content="Rules. Etiquette. Gear. How to play. Get certified for $1.">
-<meta property="og:image" content="../assets/img/og.jpg">
+<meta property="og:site_name" content="Level Up Certified">
+<meta property="og:title" content="Get Level Up Certified">
+<meta property="og:description" content="Rules. Etiquette. Gear. How to play. $1, good for a year.">
+<meta property="og:image" content="https://hamannlpcornhole-beep.github.io/level-up-certified/assets/img/og-certified.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="LU Certified">
 <link rel="icon" type="image/png" href="../assets/img/icon.png">
-<link rel="apple-touch-icon" href="../assets/img/icon.png">
+<link rel="apple-touch-icon" href="../assets/img/icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;0,900;1,800;1,900&family=Barlow:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/css/site.css">
+<link rel="stylesheet" href="../assets/css/course-widgets.css">
+<link rel="stylesheet" href="../assets/css/course.css">
 <script>document.documentElement.classList.add('js')</script>
 </head>
 <body data-page="certify">
 <div data-nav></div>
 <main id="main">
-  <section class="page-hero">
-    <div class="rings"><i></i><i></i><i></i><i></i><i></i></div>
-    <div class="bg-word">The</div>
-    <div class="wrap">
-      <nav class="crumbs"><a href="../">Home</a><i></i><span>The Course</span></nav>
-      <h1 class="display h-1">Get Level Up Certified</h1>
-      <p class="lead">The $1 course, your progress, and your player card.</p>
-      <div class="actions"><span class="chip chip-orange"><i class="dot"></i> Building this page right now</span></div>
-    </div>
-  </section>
+  <div id="app" class="course" aria-live="polite">
+    <section class="enroll"><div class="wrap"><p class="lead">Loading your course.</p></div></section>
+  </div>
 </main>
 <div data-footer></div>
 <script type="module" src="../assets/js/site.js"></script>
+<script type="module" src="../assets/js/course/app.js"></script>
 </body>
 </html>

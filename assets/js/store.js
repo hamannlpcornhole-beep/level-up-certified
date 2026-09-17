@@ -79,10 +79,19 @@ export function lookupCert(rawId) {
   const mine = load().cert;
   const rec = (mine && mine.id === id) ? mine : SAMPLE_CERTS[id];
   if (!rec) return { id, status: 'missing' };
-  const expired = new Date(rec.expires) < new Date();
+  const expired = toDate(rec.expires) < new Date();
   return { id, ...rec, status: expired ? 'expired' : 'valid', sample: !!SAMPLE_CERTS[id] };
 }
 
+export function toDate(d) {
+  // Treat plain YYYY-MM-DD as a local date, not UTC midnight.
+  if (typeof d === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(d)) {
+    const [y, m, day] = d.split('-').map(Number);
+    return new Date(y, m - 1, day);
+  }
+  return new Date(d);
+}
+
 export function fmtDate(d, opts = { month: 'short', day: 'numeric', year: 'numeric' }) {
-  try { return new Date(d).toLocaleDateString('en-US', opts); } catch { return String(d); }
+  try { return toDate(d).toLocaleDateString('en-US', opts); } catch { return String(d); }
 }
