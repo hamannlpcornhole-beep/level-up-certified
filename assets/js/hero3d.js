@@ -334,7 +334,7 @@ export function startHero({ canvas, container, logoUrl, onScore, onRound, onRead
     camera.aspect = w / h;
     if (w / h > 1.05) {
       camera.fov = 30;
-      camera.setViewOffset(w, h, -w * 0.21, h * 0.02, w, h);
+      camera.setViewOffset(w, h, -w * 0.25, h * 0.02, w, h);
       camBase.set(3.5, 3.5, 7.9); camLook.set(0.05, 0.38, -0.62);
     } else {
       camera.fov = 36;
