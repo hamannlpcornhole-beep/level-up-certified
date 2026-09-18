@@ -37,64 +37,62 @@ function cvs(w, h, draw) {
 // Printed board wrap: Level Up orange on charcoal, ring around the hole.
 function drawWrap(g, logo) {
   const W = 1024; const H = 2048;
-  const base = g.createLinearGradient(0, 0, W, H);
-  base.addColorStop(0, '#141419'); base.addColorStop(0.55, '#0F0F13'); base.addColorStop(1, '#1A120C');
-  g.fillStyle = base; g.fillRect(0, 0, W, H);
-  // angled speed lines
-  g.save(); g.beginPath(); g.rect(0, 0, W, H); g.clip();
-  for (let i = -8; i < 26; i++) {
-    g.fillStyle = i % 3 === 0 ? 'rgba(243,108,33,.20)' : 'rgba(255,255,255,.028)';
-    g.save(); g.translate(i * 90, 0); g.rotate(0.28);
-    g.fillRect(0, -400, i % 3 === 0 ? 16 : 34, 3000);
-    g.restore();
+  // cream vinyl wrap with a faint print texture
+  g.fillStyle = '#F2EADB'; g.fillRect(0, 0, W, H);
+  for (let i = 0; i < 2600; i++) {
+    g.fillStyle = `rgba(120,96,62,${rnd(0.012, 0.045).toFixed(3)})`;
+    g.fillRect(rnd(0, W), rnd(0, H), rnd(1, 3), rnd(1, 3));
   }
-  // big brand block low on the board
-  const blk = g.createLinearGradient(0, 1500, 0, 1900);
-  blk.addColorStop(0, 'rgba(243,108,33,.95)'); blk.addColorStop(1, 'rgba(199,74,15,.95)');
-  g.fillStyle = blk;
-  g.beginPath(); g.moveTo(0, 1560); g.lineTo(W, 1460); g.lineTo(W, 1760); g.lineTo(0, 1860); g.closePath(); g.fill();
-  g.restore();
-  // hole ring
+  const shade = g.createRadialGradient(W / 2, H / 2, 200, W / 2, H / 2, 1200);
+  shade.addColorStop(0, 'rgba(255,255,255,0)'); shade.addColorStop(1, 'rgba(90,70,40,.10)');
+  g.fillStyle = shade; g.fillRect(0, 0, W, H);
+  // border lines like the real boards
+  g.strokeStyle = '#1B1E2A'; g.lineWidth = 18; g.strokeRect(44, 44, W - 88, H - 88);
+  g.strokeStyle = '#E4561B'; g.lineWidth = 7; g.strokeRect(76, 76, W - 152, H - 152);
+  // ring around the hole (hole center sits at canvas y 384)
   const hx = W / 2; const hy = 384;
-  g.strokeStyle = '#F4F1EA'; g.lineWidth = 26;
-  g.beginPath(); g.arc(hx, hy, 168, 0, Math.PI * 2); g.stroke();
-  g.strokeStyle = '#F36C21'; g.lineWidth = 10;
-  g.beginPath(); g.arc(hx, hy, 196, 0, Math.PI * 2); g.stroke();
-  g.strokeStyle = 'rgba(255,255,255,.15)'; g.lineWidth = 3;
-  g.beginPath(); g.arc(hx, hy, 236, 0, Math.PI * 2); g.stroke();
-  // wording
-  g.textAlign = 'center';
-  g.font = 'italic 900 132px "Barlow Condensed", Impact, sans-serif';
-  g.fillStyle = '#0B0B0E';
-  g.save(); g.translate(W / 2, 1690); g.rotate(-0.1); g.fillText('LEVEL UP CERTIFIED', 0, 0); g.restore();
-  g.font = '700 34px "JetBrains Mono", monospace';
-  g.fillStyle = 'rgba(255,255,255,.55)';
-  g.fillText('LEVELUPCORNHOLE.SHOP', W / 2, 1980);
-  g.font = '700 30px "JetBrains Mono", monospace'; g.fillStyle = 'rgba(255,255,255,.28)';
-  g.fillText('2 FT x 4 FT  ·  6 IN HOLE', W / 2, 700);
-  // wordmark that faces the camera side (drawn upside down in the wrap)
-  g.save();
-  g.translate(W / 2, 760);
-  g.font = 'italic 900 96px "Barlow Condensed", Impact, sans-serif';
-  g.fillStyle = 'rgba(255,255,255,.9)';
-  g.fillText('LEVEL UP', 0, 0);
-  g.font = '700 30px "JetBrains Mono", monospace';
-  g.fillStyle = 'rgba(243,108,33,.95)';
-  g.fillText('C E R T I F I E D', 0, 38);
-  g.restore();
-  if (logo) {
-    const lw = 430; const lh = lw * (logo.height / logo.width);
-    g.save(); g.globalAlpha = 0.96; g.shadowColor = 'rgba(0,0,0,.55)'; g.shadowBlur = 26;
-    g.drawImage(logo, W / 2 - lw / 2, 930, lw, lh);
+  g.fillStyle = '#E4561B'; g.beginPath(); g.arc(hx, hy, 236, 0, Math.PI * 2); g.fill();
+  g.strokeStyle = '#1B1E2A'; g.lineWidth = 8; g.beginPath(); g.arc(hx, hy, 236, 0, Math.PI * 2); g.stroke();
+  g.fillStyle = '#F2EADB'; g.beginPath(); g.arc(hx, hy, 160, 0, Math.PI * 2); g.fill();
+  // text around the ring, reading for the thrower
+  g.fillStyle = '#FFFFFF';
+  g.font = '800 30px "Barlow Condensed", Impact, sans-serif';
+  g.textAlign = 'center'; g.textBaseline = 'middle';
+  const ringText = 'LEVEL UP  ·  CERTIFIED  ·  LEVEL UP  ·  ';
+  const span = Math.PI * 0.92;
+  for (let i = 0; i < ringText.length; i++) {
+    const a = Math.PI - (Math.PI - span) / 2 - (i / (ringText.length - 1)) * span;
+    g.save();
+    g.translate(hx + Math.cos(a) * 198, hy + Math.sin(a) * 198);
+    g.rotate(a - Math.PI / 2);
+    g.fillText(ringText[i], 0, 0);
     g.restore();
   }
-  // clear coat sheen streaks
-  g.globalAlpha = 0.05;
-  for (let i = 0; i < 40; i++) {
-    g.fillStyle = '#fff';
-    g.fillRect(rnd(0, W), rnd(0, H), rnd(40, 260), 1.5);
+  // side edge text, like the "anyone can play" strip
+  g.save();
+  g.translate(W - 118, 640); g.rotate(Math.PI / 2);
+  g.font = '700 30px "JetBrains Mono", monospace'; g.fillStyle = '#1B1E2A';
+  g.fillText('LEVELUPCORNHOLE.SHOP', 0, 0);
+  g.restore();
+  g.save();
+  g.translate(118, 640); g.rotate(-Math.PI / 2);
+  g.font = '700 30px "JetBrains Mono", monospace'; g.fillStyle = '#1B1E2A';
+  g.fillText('LEVEL UP CERTIFIED', 0, 0);
+  g.restore();
+  // logo and wordmark near the thrower end
+  if (logo) {
+    const lw = 520; const lh = lw * (logo.height / logo.width);
+    g.save(); g.shadowColor = 'rgba(0,0,0,.25)'; g.shadowBlur = 18;
+    g.drawImage(logo, W / 2 - lw / 2, 1060, lw, lh);
+    g.restore();
   }
-  g.globalAlpha = 1;
+  g.textAlign = 'center'; g.textBaseline = 'alphabetic';
+  g.font = 'italic 900 118px "Barlow Condensed", Impact, sans-serif';
+  g.fillStyle = '#1B1E2A';
+  g.fillText('LEVEL UP', W / 2, 1810);
+  g.font = '700 34px "JetBrains Mono", monospace';
+  g.fillStyle = '#E4561B';
+  g.fillText('C E R T I F I E D', W / 2, 1866);
 }
 
 // Birch plywood for the frame and legs.
@@ -149,21 +147,16 @@ function drawRail(g) {
 // Red carpet lane mats with white brush marks and a sponsor strip.
 function drawMat(g) {
   const W = 512; const H = 1024;
-  g.fillStyle = '#8E1B12'; g.fillRect(0, 0, W, H);
-  for (let i = 0; i < 4000; i++) {
-    g.fillStyle = `rgba(${rnd(120, 190) | 0},${rnd(20, 45) | 0},${rnd(12, 30) | 0},.5)`;
-    g.fillRect(rnd(0, W), rnd(0, H), rnd(1, 3), rnd(1, 3));
+  g.fillStyle = '#17181E'; g.fillRect(0, 0, W, H);
+  for (let i = 0; i < 3500; i++) {
+    g.fillStyle = `rgba(255,255,255,${rnd(0.01, 0.035).toFixed(3)})`;
+    g.fillRect(rnd(0, W), rnd(0, H), rnd(1, 2), rnd(1, 2));
   }
-  g.strokeStyle = 'rgba(244,241,234,.85)';
-  g.lineWidth = 26; g.lineCap = 'round';
-  g.beginPath(); g.moveTo(70, 250); g.quadraticCurveTo(150, 360, 96, 470); g.stroke();
-  g.beginPath(); g.moveTo(430, 620); g.quadraticCurveTo(350, 720, 410, 830); g.stroke();
-  g.fillStyle = '#121216'; g.fillRect(0, 0, W, 70); g.fillRect(0, H - 70, W, 70);
-  g.fillStyle = 'rgba(255,255,255,.5)';
-  g.font = '700 26px "JetBrains Mono", monospace'; g.textAlign = 'center';
-  const matText = (t, y) => { g.save(); g.translate(W / 2, y); g.scale(1, -1); g.fillText(t, 0, 0); g.restore(); };
-  matText('LEVEL UP CORNHOLE', 46);
-  matText('LEVEL UP CERTIFIED', H - 26);
+  g.strokeStyle = '#C3261A'; g.lineWidth = 14; g.strokeRect(10, 10, W - 20, H - 20);
+  g.fillStyle = 'rgba(255,255,255,.45)';
+  g.font = '700 22px "JetBrains Mono", monospace'; g.textAlign = 'center';
+  g.fillText('LEVEL UP CORNHOLE', W / 2, 60);
+  g.fillText('LEVEL UP CERTIFIED', W / 2, H - 44);
 }
 
 // Printed competition bag faces.
@@ -267,7 +260,7 @@ const ROUNDS = [
   [['w', 'airmailIn'], ['o', 'blocker'], ['w', 'slideIn'], ['o', 'slideIn'],
     ['w', 'woodie', 0.48, -0.2], ['o', 'woodie', -0.5, 0.2], ['w', 'woodie', 0.3, 0.75], ['o', 'short']],
 ];
-const THROW_GAP = 1.5;
+const THROW_GAP = 1.8;
 
 /* ---------------------------------------------------------------- scene */
 export function startHero({ canvas, container, logoUrl, onScore, onRound, onReady }) {
@@ -282,22 +275,22 @@ export function startHero({ canvas, container, logoUrl, onScore, onRound, onRead
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, small() ? 1.5 : 1.75));
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.05;
+  renderer.toneMappingExposure = 1.08;
   renderer.setClearColor(0x000000, 0);
 
   const scene = new THREE.Scene();
-  scene.fog = new THREE.Fog(0x08080a, 14, 48);
+  scene.fog = new THREE.Fog(0x141416, 20, 62);
   const pmrem = new THREE.PMREMGenerator(renderer);
   scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
-  scene.environmentIntensity = 0.38;
+  scene.environmentIntensity = 0.55;
 
   const camera = new THREE.PerspectiveCamera(32, 1, 0.1, 120);
   const camBase = new THREE.Vector3();
   const camLook = new THREE.Vector3();
 
   /* venue lighting */
-  scene.add(new THREE.HemisphereLight(0xcdd6ee, 0x08080a, 0.26));
-  const key = new THREE.DirectionalLight(0xfff4e6, 1.5);
+  scene.add(new THREE.HemisphereLight(0xf2f0ea, 0x2a2018, 0.62));
+  const key = new THREE.DirectionalLight(0xfff6ec, 2.1);
   key.position.set(-5, 9, 4);
   scene.add(key);
   const overhead = new THREE.SpotLight(0xffffff, 38, 15, 0.6, 0.85, 1.6);
@@ -312,26 +305,32 @@ export function startHero({ canvas, container, logoUrl, onScore, onRound, onRead
   warm.position.set(2.8, 1.6, 2.2);
   scene.add(warm);
 
-  /* floor: polished concrete */
+  /* floor: hardwood gym court, like the event footage */
   const floorTex = cvs(1024, 1024, (g) => {
-    g.fillStyle = '#1C1C21'; g.fillRect(0, 0, 1024, 1024);
-    for (let i = 0; i < 1400; i++) {
-      g.fillStyle = `rgba(${rnd(120, 190) | 0},${rnd(120, 190) | 0},${rnd(130, 200) | 0},${rnd(0.02, 0.09).toFixed(2)})`;
-      g.beginPath(); g.arc(rnd(0, 1024), rnd(0, 1024), rnd(1, 8), 0, Math.PI * 2); g.fill();
+    const W = 1024;
+    for (let col = 0; col < 32; col++) {
+      let y = -rnd(0, 240);
+      while (y < W) {
+        const len = rnd(180, 440);
+        const t = Math.random();
+        g.fillStyle = `rgb(${(192 + t * 30) | 0},${(146 + t * 26) | 0},${(94 + t * 20) | 0})`;
+        g.fillRect(col * 32, y, 32, len);
+        for (let k = 0; k < 7; k++) {
+          g.fillStyle = `rgba(120,78,36,${rnd(0.04, 0.11).toFixed(2)})`;
+          g.fillRect(col * 32 + rnd(2, 30), y + rnd(0, len), 1, rnd(18, 90));
+        }
+        g.fillStyle = 'rgba(60,38,18,.35)'; g.fillRect(col * 32, y + len - 1, 32, 2);
+        y += len;
+      }
+      g.fillStyle = 'rgba(60,38,18,.25)'; g.fillRect(col * 32 + 31, 0, 1, W);
     }
-    for (let i = 0; i < 18; i++) {
-      const x = rnd(0, 1024); const y = rnd(0, 1024);
-      const grd = g.createRadialGradient(x, y, 4, x, y, rnd(60, 220));
-      grd.addColorStop(0, 'rgba(255,255,255,.05)'); grd.addColorStop(1, 'rgba(255,255,255,0)');
-      g.fillStyle = grd; g.fillRect(x - 240, y - 240, 480, 480);
-    }
-    g.strokeStyle = 'rgba(0,0,0,.35)'; g.lineWidth = 3;
-    g.beginPath(); g.moveTo(0, 512); g.lineTo(1024, 512); g.stroke();
-    g.beginPath(); g.moveTo(512, 0); g.lineTo(512, 1024); g.stroke();
+    const sheen = g.createLinearGradient(0, 0, W, W);
+    sheen.addColorStop(0, 'rgba(255,255,255,.07)'); sheen.addColorStop(0.5, 'rgba(255,255,255,0)'); sheen.addColorStop(1, 'rgba(255,255,255,.05)');
+    g.fillStyle = sheen; g.fillRect(0, 0, W, W);
   }).tex;
   floorTex.wrapS = floorTex.wrapT = THREE.RepeatWrapping;
-  floorTex.repeat.set(8, 8);
-  const floor = new THREE.Mesh(new THREE.PlaneGeometry(120, 120), new THREE.MeshStandardMaterial({ map: floorTex, roughness: 0.5, metalness: 0.05, color: 0x6f757e }));
+  floorTex.repeat.set(12, 12);
+  const floor = new THREE.Mesh(new THREE.PlaneGeometry(120, 120), new THREE.MeshStandardMaterial({ map: floorTex, roughness: 0.32, metalness: 0.02, color: 0xb3a89b }));
   floor.rotation.x = -Math.PI / 2;
   scene.add(floor);
 
@@ -434,7 +433,7 @@ export function startHero({ canvas, container, logoUrl, onScore, onRound, onRead
   );
   catchBox.position.set(0, -0.32, HOLE_Z);
   board.add(catchBox);
-  const flash = new THREE.Mesh(new THREE.RingGeometry(0.26, 0.4, 64), new THREE.MeshBasicMaterial({ color: 0xffb23f, transparent: true, opacity: 0, blending: THREE.AdditiveBlending, depthWrite: false, toneMapped: false }));
+  const flash = new THREE.Mesh(new THREE.RingGeometry(0.26, 0.4, 64), new THREE.MeshBasicMaterial({ color: 0xff7a1f, transparent: true, opacity: 0, blending: THREE.AdditiveBlending, depthWrite: false, toneMapped: false }));
   flash.rotation.x = -Math.PI / 2;
   flash.position.set(0, 0.007, HOLE_Z);
   board.add(flash);
@@ -451,14 +450,45 @@ export function startHero({ canvas, container, logoUrl, onScore, onRound, onRead
   towerPost.position.set(2.6, 0.6, -(LANE - 2.4));
   scene.add(towerPost);
 
-  const banner = new THREE.Mesh(new THREE.PlaneGeometry(26, 3.1), new THREE.MeshStandardMaterial({ map: cvs(2048, 256, drawBanner).tex, roughness: 0.9 }));
-  banner.position.set(0, 1.55, -(LANE + 9));
-  banner.rotation.y = Math.PI;
-  scene.add(banner);
-  const wall = new THREE.Mesh(new THREE.PlaneGeometry(60, 14), new THREE.MeshStandardMaterial({ color: 0x0c0c10, roughness: 1 }));
-  wall.position.set(0, 7, -(LANE + 9.8));
-  wall.rotation.y = Math.PI;
-  scene.add(wall);
+  const crowd = cvs(2048, 512, (g) => {
+    const W = 2048; const H = 512;
+    const wall = g.createLinearGradient(0, 0, 0, H);
+    wall.addColorStop(0, '#1B2A4E'); wall.addColorStop(0.55, '#23365F'); wall.addColorStop(1, '#141A2A');
+    g.fillStyle = wall; g.fillRect(0, 0, W, H);
+    for (let x = 0; x < W; x += 256) {
+      g.fillStyle = 'rgba(255,255,255,.06)'; g.fillRect(x + 30, 40, 190, 170);
+      g.fillStyle = 'rgba(243,108,33,.55)'; g.fillRect(x + 30, 200, 190, 10);
+      g.font = 'italic 900 44px "Barlow Condensed", Impact, sans-serif'; g.fillStyle = 'rgba(255,255,255,.35)';
+      g.textAlign = 'center'; g.fillText('LEVEL UP', x + 125, 140);
+    }
+    for (let i = 0; i < 260; i++) {
+      const x = rnd(0, W); const y = rnd(300, 470); const sc = rnd(0.7, 1.25);
+      g.fillStyle = ['#0F1118', '#1A1C24', '#2A2D38', '#3A2A22', '#4A3A30', '#262A36'][i % 6];
+      g.beginPath(); g.arc(x, y, 14 * sc, 0, Math.PI * 2); g.fill();
+      g.beginPath(); g.ellipse(x, y + 44 * sc, 26 * sc, 32 * sc, 0, 0, Math.PI * 2); g.fill();
+    }
+    g.fillStyle = '#0C0D12'; g.fillRect(0, 470, W, 42);
+  });
+  const backdrop = new THREE.Mesh(new THREE.PlaneGeometry(90, 22.5), new THREE.MeshStandardMaterial({ map: crowd.tex, roughness: 0.9 }));
+  backdrop.position.set(0, 11.25, -(LANE + 16));
+  scene.add(backdrop);
+  // other courts down the gym, like a real event floor
+  [6.4, 14].forEach((x) => {
+    [-12, -24, -36].forEach((z) => {
+      const b = buildBoard();
+      b.position.set(x, BOARD_Y, z);
+      b.rotation.set(TILT, 0, 0);
+      scene.add(b);
+      [-0.78, 0.78].forEach((lx) => {
+        const leg = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.72, 0.1), woodMat);
+        leg.position.set(x + lx, 0.36, z - 1.78);
+        scene.add(leg);
+      });
+      const m = new THREE.Mesh(new THREE.BoxGeometry(3.8, 0.012, 6.8), matMat);
+      m.position.set(x, 0.006, z + 1.6);
+      scene.add(m);
+    });
+  });
 
   /* light cones for the broadcast look */
   const coneMat = new THREE.MeshBasicMaterial({ color: 0xfff0dd, transparent: true, opacity: 0.022, blending: THREE.AdditiveBlending, depthWrite: false, side: THREE.DoubleSide });
@@ -470,17 +500,31 @@ export function startHero({ canvas, container, logoUrl, onScore, onRound, onRead
 
   /* bags */
   const BAG = 0.5;
-  const bagGeo = new RoundedBoxGeometry(BAG, BAG, BAG, 6, 0.155);
-  bagGeo.scale(1, 0.32, 1);
-  pillow(bagGeo, BAG / 2);
+  const makeBagGeo = (seed) => {
+    const geo = new RoundedBoxGeometry(BAG, BAG, BAG, 7, 0.16);
+    geo.scale(1, 0.34, 1);
+    const pos = geo.attributes.position; const v = new THREE.Vector3();
+    const p1 = seed * 1.9 + 0.4; const p2 = seed * 2.7 + 1.1;
+    for (let i = 0; i < pos.count; i++) {
+      v.fromBufferAttribute(pos, i);
+      const d = Math.min(1, Math.max(Math.abs(v.x), Math.abs(v.z)) / (BAG / 2));
+      let y = v.y * (1 - 0.46 * Math.pow(d, 2.4));
+      y *= 1 + 0.16 * Math.sin(v.x * 10 + p1) * Math.cos(v.z * 8 + p2);
+      if (v.y > 0) y -= 0.02 * Math.sin(v.x * 4 + p2) * (1 - d);
+      pos.setXYZ(i, v.x * (1 + 0.025 * Math.sin(v.z * 11 + p1)), y, v.z * (1 + 0.025 * Math.cos(v.x * 11 + p2)));
+    }
+    geo.computeVertexNormals();
+    return geo;
+  };
+  const bagGeos = [0, 1, 2, 3].map(makeBagGeo);
   const bagMats = {
-    o: new THREE.MeshStandardMaterial({ map: cvs(256, 256, (g) => drawBagFace(g, { base: '#E9601A', print: 'rgba(120,40,8,.55)', mark: 'rgba(255,255,255,.85)', stitch: 'rgba(255,220,190,.8)' })).tex, roughness: 0.95, metalness: 0 }),
-    w: new THREE.MeshStandardMaterial({ map: cvs(256, 256, (g) => drawBagFace(g, { base: '#20222A', print: 'rgba(255,255,255,.12)', mark: 'rgba(243,108,33,.9)', stitch: 'rgba(255,255,255,.45)' })).tex, roughness: 0.95, metalness: 0 }),
+    o: new THREE.MeshStandardMaterial({ map: cvs(256, 256, (g) => drawBagFace(g, { base: '#E25A17', print: 'rgba(90,28,6,.5)', mark: 'rgba(255,255,255,.9)', stitch: 'rgba(255,225,200,.85)' })).tex, roughness: 0.97, metalness: 0 }),
+    w: new THREE.MeshStandardMaterial({ map: cvs(256, 256, (g) => drawBagFace(g, { base: '#4B4F5A', print: 'rgba(20,22,28,.45)', mark: 'rgba(255,255,255,.8)', stitch: 'rgba(255,255,255,.5)' })).tex, roughness: 0.97, metalness: 0 }),
   };
   const pool = [];
   const getBag = (team) => {
     let b = pool.find((x) => !x.userData.busy);
-    if (!b) { b = new THREE.Mesh(bagGeo, bagMats[team]); board.add(b); pool.push(b); }
+    if (!b) { b = new THREE.Mesh(bagGeos[pool.length % bagGeos.length], bagMats[team]); board.add(b); pool.push(b); }
     b.material = bagMats[team];
     b.userData.busy = true;
     b.visible = true;
@@ -581,7 +625,7 @@ export function startHero({ canvas, container, logoUrl, onScore, onRound, onRead
     const s = SHOTS[shotName];
     const mesh = getBag(team);
     // start the throw in world space (just behind the camera) then convert to board space
-    const from = board.worldToLocal(new THREE.Vector3(rnd(-1.5, 1.5), rnd(1.5, 2.0), rnd(8.4, 9.4)));
+    const from = board.worldToLocal(new THREE.Vector3(rnd(2.0, 3.2), rnd(1.3, 1.7), rnd(7.6, 8.6)));
     mesh.position.copy(from);
     mesh.rotation.set(rnd(-0.5, -0.2), rnd(0, 6), rnd(-0.15, 0.15));
     const land = new THREE.Vector3(
@@ -596,7 +640,7 @@ export function startHero({ canvas, container, logoUrl, onScore, onRound, onRead
   function addPoints(team, pts, kind, shotName, mesh) {
     roundPts[team] += pts;
     if (kind === 'in') {
-      flash.material.opacity = 1;
+      flash.material.opacity = 0.55;
       burstAt(holeAnchor, 1.25, 3);
     }
     if (onScore) {
@@ -665,7 +709,7 @@ export function startHero({ canvas, container, logoUrl, onScore, onRound, onRead
           nudgeNeighbors(a);
           if (a.end) a.phase = 'slide';
           else if (a.s.result === 'off') { a.phase = 'rest'; addPoints(a.team, 0, 'off', a.shotName, a.mesh); resting.push(a); active.splice(k, 1); }
-          else { a.phase = 'rest'; addPoints(a.team, 1, 'on', a.shotName, a.mesh); resting.push(a); active.splice(k, 1); }
+          else { a.phase = 'rest'; a.mesh.rotation.x = rnd(-0.05, 0.05); a.mesh.rotation.z = rnd(-0.05, 0.05); addPoints(a.team, 1, 'on', a.shotName, a.mesh); resting.push(a); active.splice(k, 1); }
         }
       } else if (a.phase === 'slide') {
         const p = Math.min(1, a.t / a.s.slide);
