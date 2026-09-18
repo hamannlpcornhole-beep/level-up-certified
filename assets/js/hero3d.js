@@ -74,7 +74,7 @@ function drawWrap(g, logo) {
   g.fillText('2 FT x 4 FT  ·  6 IN HOLE', W / 2, 700);
   // wordmark that faces the camera side (drawn upside down in the wrap)
   g.save();
-  g.translate(W / 2, 640); g.rotate(Math.PI);
+  g.translate(W / 2, 760);
   g.font = 'italic 900 96px "Barlow Condensed", Impact, sans-serif';
   g.fillStyle = 'rgba(255,255,255,.9)';
   g.fillText('LEVEL UP', 0, 0);
@@ -189,11 +189,18 @@ function drawBagFace(g, opts) {
   g.fillStyle = opts.mark;
   g.fillText('LU', W / 2, W / 2 + 4);
   // stitched edge
+  const roundRect = (x, y, w, h, r) => {
+    g.beginPath();
+    g.moveTo(x + r, y);
+    g.arcTo(x + w, y, x + w, y + h, r); g.arcTo(x + w, y + h, x, y + h, r);
+    g.arcTo(x, y + h, x, y, r); g.arcTo(x, y, x + w, y, r);
+    g.closePath();
+  };
   g.setLineDash([11, 9]); g.lineWidth = 5; g.strokeStyle = opts.stitch;
-  g.strokeRect(17, 17, W - 34, W - 34);
+  roundRect(20, 20, W - 40, W - 40, 44); g.stroke();
   g.setLineDash([]);
-  g.lineWidth = 8; g.strokeStyle = 'rgba(0,0,0,.28)';
-  g.strokeRect(4, 4, W - 8, W - 8);
+  g.lineWidth = 9; g.strokeStyle = 'rgba(0,0,0,.25)';
+  roundRect(5, 5, W - 10, W - 10, 56); g.stroke();
 }
 
 function drawTower(g) {
@@ -239,7 +246,7 @@ function pillow(geo, half) {
   for (let i = 0; i < p.count; i++) {
     v.fromBufferAttribute(p, i);
     const d = Math.min(1, Math.max(Math.abs(v.x), Math.abs(v.z)) / half);
-    p.setY(i, v.y * (1 - 0.55 * Math.pow(d, 2.2)));
+    p.setY(i, v.y * (1 - 0.42 * Math.pow(d, 2.6)));
   }
   geo.computeVertexNormals();
   return geo;
@@ -247,11 +254,11 @@ function pillow(geo, half) {
 
 /* ---------------------------------------------------------------- shots */
 const SHOTS = {
-  slideIn: { land: [0.05, 0.055, 0.55], end: [0, 0.055, HOLE_Z], slide: 0.78, result: 'in', arc: 1.15, name: 'Slide' },
-  airmailIn: { land: [0, 0.3, HOLE_Z], end: null, slide: 0, result: 'in', arc: 2.1, name: 'Airmail' },
-  woodie: { land: [0.4, 0.055, 0.3], end: [0.36, 0.055, -0.25], slide: 0.5, result: 'on', arc: 1.05, name: 'Woodie' },
-  blocker: { land: [-0.06, 0.055, 0.2], end: [-0.04, 0.055, -0.72], slide: 0.62, result: 'on', arc: 1.0, name: 'Blocker' },
-  short: { land: [0.25, 0.05, 2.75], end: null, slide: 0, result: 'off', arc: 0.9, name: 'Short' },
+  slideIn: { land: [0.05, 0.055, 0.55], end: [0, 0.055, HOLE_Z], slide: 0.78, result: 'in', arc: 2.1, name: 'Slide' },
+  airmailIn: { land: [0, 0.3, HOLE_Z], end: null, slide: 0, result: 'in', arc: 3.0, name: 'Airmail' },
+  woodie: { land: [0.4, 0.055, 0.3], end: [0.36, 0.055, -0.25], slide: 0.5, result: 'on', arc: 2.0, name: 'Woodie' },
+  blocker: { land: [-0.06, 0.055, 0.2], end: [-0.04, 0.055, -0.72], slide: 0.62, result: 'on', arc: 1.95, name: 'Blocker' },
+  short: { land: [0.25, 0.05, 2.75], end: null, slide: 0, result: 'off', arc: 1.7, name: 'Short' },
 };
 
 const ROUNDS = [
@@ -291,18 +298,18 @@ export function startHero({ canvas, container, logoUrl, onScore, onRound, onRead
   /* venue lighting */
   scene.add(new THREE.HemisphereLight(0xcdd6ee, 0x08080a, 0.26));
   const key = new THREE.DirectionalLight(0xfff4e6, 1.5);
-  key.position.set(-5, 9, -3);
+  key.position.set(-5, 9, 4);
   scene.add(key);
   const overhead = new THREE.SpotLight(0xffffff, 38, 15, 0.6, 0.85, 1.6);
   overhead.position.set(0.4, 8, -0.5);
   overhead.target.position.set(0, 0, -0.5);
   scene.add(overhead, overhead.target);
   const farLight = new THREE.SpotLight(0xffeedd, 70, 26, 0.6, 0.8, 1.6);
-  farLight.position.set(0, 8, 28);
-  farLight.target.position.set(0, 0, 29);
+  farLight.position.set(0, 8, -28);
+  farLight.target.position.set(0, 0, -29);
   scene.add(farLight, farLight.target);
   const warm = new THREE.PointLight(0xff8a2b, 22, 12, 2);
-  warm.position.set(2.6, 1.6, -2.4);
+  warm.position.set(2.8, 1.6, 2.2);
   scene.add(warm);
 
   /* floor: polished concrete */
@@ -337,9 +344,9 @@ export function startHero({ canvas, container, logoUrl, onScore, onRound, onRead
     scene.add(m);
     return m;
   };
-  addMat(0.7, 4.1, 8.4);
-  addMat(LANE - 1.2);
-  addMat(LANE + 5.4, 4.2, 5.5);
+  addMat(0.2, 4.1, 9.2);
+  addMat(-(LANE - 1.2));
+  addMat(-(LANE + 5.2), 4.2, 5.5);
 
   /* board builder */
   const wrapTex = cvs(1024, 2048, (g) => drawWrap(g, null));
@@ -400,12 +407,12 @@ export function startHero({ canvas, container, logoUrl, onScore, onRound, onRead
 
   // far board down the lane
   const farBoard = buildBoard();
-  farBoard.position.set(0, BOARD_Y, LANE);
+  farBoard.position.set(0, BOARD_Y, -LANE);
   farBoard.rotation.set(-TILT, Math.PI, 0);
   scene.add(farBoard);
   [-0.78, 0.78].forEach((x) => {
     const leg = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.72, 0.1), woodMat);
-    leg.position.set(x, 0.36, LANE + 1.78);
+    leg.position.set(x, 0.36, -(LANE - 1.78));
     scene.add(leg);
   });
 
@@ -419,8 +426,14 @@ export function startHero({ canvas, container, logoUrl, onScore, onRound, onRead
     toneMapped: false, side: THREE.DoubleSide,
   }));
   holeGlow.rotation.x = -Math.PI / 2;
-  holeGlow.position.set(0, -0.2, HOLE_Z);
+  holeGlow.position.set(0, -0.62, HOLE_Z);
   board.add(holeGlow);
+  const catchBox = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.248, 0.248, 0.62, 36, 1, true),
+    new THREE.MeshStandardMaterial({ color: 0x0a0a0c, roughness: 0.95, side: THREE.BackSide }),
+  );
+  catchBox.position.set(0, -0.32, HOLE_Z);
+  board.add(catchBox);
   const flash = new THREE.Mesh(new THREE.RingGeometry(0.26, 0.4, 64), new THREE.MeshBasicMaterial({ color: 0xffb23f, transparent: true, opacity: 0, blending: THREE.AdditiveBlending, depthWrite: false, toneMapped: false }));
   flash.rotation.x = -Math.PI / 2;
   flash.position.set(0, 0.007, HOLE_Z);
@@ -431,23 +444,25 @@ export function startHero({ canvas, container, logoUrl, onScore, onRound, onRead
 
   /* score tower + banner */
   const tower = new THREE.Mesh(new THREE.BoxGeometry(0.42, 2.6, 0.06), new THREE.MeshStandardMaterial({ map: cvs(256, 1024, drawTower).tex, roughness: 0.7 }));
-  tower.position.set(2.6, 1.55, LANE - 1.2);
-  tower.rotation.y = -0.5;
+  tower.position.set(2.6, 1.55, -(LANE - 2.4));
+  tower.rotation.y = 0.45;
   scene.add(tower);
   const towerPost = new THREE.Mesh(new THREE.BoxGeometry(0.08, 1.4, 0.08), new THREE.MeshStandardMaterial({ color: 0x1a1a1f, roughness: 0.6 }));
-  towerPost.position.set(2.6, 0.6, LANE - 1.2);
+  towerPost.position.set(2.6, 0.6, -(LANE - 2.4));
   scene.add(towerPost);
 
   const banner = new THREE.Mesh(new THREE.PlaneGeometry(26, 3.1), new THREE.MeshStandardMaterial({ map: cvs(2048, 256, drawBanner).tex, roughness: 0.9 }));
-  banner.position.set(0, 1.55, LANE + 9.5);
+  banner.position.set(0, 1.55, -(LANE + 9));
+  banner.rotation.y = Math.PI;
   scene.add(banner);
   const wall = new THREE.Mesh(new THREE.PlaneGeometry(60, 14), new THREE.MeshStandardMaterial({ color: 0x0c0c10, roughness: 1 }));
-  wall.position.set(0, 7, LANE + 10.2);
+  wall.position.set(0, 7, -(LANE + 9.8));
+  wall.rotation.y = Math.PI;
   scene.add(wall);
 
   /* light cones for the broadcast look */
   const coneMat = new THREE.MeshBasicMaterial({ color: 0xfff0dd, transparent: true, opacity: 0.022, blending: THREE.AdditiveBlending, depthWrite: false, side: THREE.DoubleSide });
-  [[0.4, -0.5], [0, LANE]].forEach(([x, z]) => {
+  [[0.2, -0.3], [0, -LANE]].forEach(([x, z]) => {
     const cone = new THREE.Mesh(new THREE.ConeGeometry(2.6, 8, 32, 1, true), coneMat);
     cone.position.set(x, 4.1, z);
     scene.add(cone);
@@ -455,7 +470,9 @@ export function startHero({ canvas, container, logoUrl, onScore, onRound, onRead
 
   /* bags */
   const BAG = 0.5;
-  const bagGeo = pillow(new RoundedBoxGeometry(BAG, 0.115, BAG, 5, 0.05), BAG / 2);
+  const bagGeo = new RoundedBoxGeometry(BAG, BAG, BAG, 6, 0.155);
+  bagGeo.scale(1, 0.32, 1);
+  pillow(bagGeo, BAG / 2);
   const bagMats = {
     o: new THREE.MeshStandardMaterial({ map: cvs(256, 256, (g) => drawBagFace(g, { base: '#E9601A', print: 'rgba(120,40,8,.55)', mark: 'rgba(255,255,255,.85)', stitch: 'rgba(255,220,190,.8)' })).tex, roughness: 0.95, metalness: 0 }),
     w: new THREE.MeshStandardMaterial({ map: cvs(256, 256, (g) => drawBagFace(g, { base: '#20222A', print: 'rgba(255,255,255,.12)', mark: 'rgba(243,108,33,.9)', stitch: 'rgba(255,255,255,.45)' })).tex, roughness: 0.95, metalness: 0 }),
@@ -478,7 +495,7 @@ export function startHero({ canvas, container, logoUrl, onScore, onRound, onRead
   for (let i = 0; i < N; i++) {
     pPos[i * 3] = rnd(-7, 7);
     pPos[i * 3 + 1] = rnd(0, 5);
-    pPos[i * 3 + 2] = rnd(-4, 22);
+    pPos[i * 3 + 2] = rnd(-16, 8);
     pSpd[i] = rnd(0.02, 0.12);
   }
   const pGeo = new THREE.BufferGeometry();
@@ -526,12 +543,12 @@ export function startHero({ canvas, container, logoUrl, onScore, onRound, onRead
     camera.aspect = w / h;
     if (w / h > 1.05) {
       camera.fov = 32;
-      camera.setViewOffset(w, h, -w * 0.13, h * 0.05, w, h);
-      camBase.set(3.4, 4.3, -9.2); camLook.set(0.15, 0.35, 5.0);
+      camera.setViewOffset(w, h, -w * 0.2, h * 0.04, w, h);
+      camBase.set(3.1, 4.3, 9.6); camLook.set(0.05, 0.3, -3.2);
     } else {
       camera.fov = 40;
-      camera.setViewOffset(w, h, 0, h * 0.33, w, h);
-      camBase.set(2.0, 5.8, -12.4); camLook.set(0, 0.2, 6.6);
+      camera.setViewOffset(w, h, 0, h * 0.16, w, h);
+      camBase.set(1.4, 6.4, 14.2); camLook.set(0, 0.05, -2.8);
     }
     camera.updateProjectionMatrix();
   }
@@ -563,7 +580,8 @@ export function startHero({ canvas, container, logoUrl, onScore, onRound, onRead
     const [team, shotName, ox, oz] = ROUNDS[roundIdx][i];
     const s = SHOTS[shotName];
     const mesh = getBag(team);
-    const from = new THREE.Vector3(rnd(-0.5, 0.5), rnd(3.4, 3.9), rnd(15, 18));
+    // start the throw in world space (just behind the camera) then convert to board space
+    const from = board.worldToLocal(new THREE.Vector3(rnd(-1.5, 1.5), rnd(1.5, 2.0), rnd(8.4, 9.4)));
     mesh.position.copy(from);
     mesh.rotation.set(rnd(-0.5, -0.2), rnd(0, 6), rnd(-0.15, 0.15));
     const land = new THREE.Vector3(
@@ -738,11 +756,11 @@ export function startHero({ canvas, container, logoUrl, onScore, onRound, onRead
     camera.position.set(
       camBase.x + sm.x * 0.45 + drift,
       camBase.y - sm.y * 0.22 + scrollP * 1.5 + Math.sin(elapsed * 0.4) * 0.015,
-      camBase.z - scrollP * 1.1,
+      camBase.z + scrollP * 1.1,
     );
-    camera.lookAt(camLook.x + sm.x * 0.12, camLook.y - scrollP * 0.4, camLook.z);
+    camera.lookAt(camLook.x - sm.x * 0.12, camLook.y - scrollP * 0.4, camLook.z);
 
-    step(dt);
+    try { step(dt); } catch (err) { if (!loop.warned) { loop.warned = true; console.error('hero step failed', err); } }
 
     for (let i = 0; i < N; i++) {
       const iy = i * 3 + 1;
@@ -784,10 +802,15 @@ export function startHero({ canvas, container, logoUrl, onScore, onRound, onRead
     setTimeout(() => { renderer.render(scene, camera); if (onReady) onReady(); }, 150);
     img.addEventListener('load', () => setTimeout(() => renderer.render(scene, camera), 60));
   } else {
-    const io = new IntersectionObserver((entries) => { entries.forEach((e) => (e.isIntersecting ? start() : stop())); }, { threshold: 0.01 });
-    io.observe(container);
-    document.addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
-    start();
+    const onScreen = () => {
+      const r = container.getBoundingClientRect();
+      return r.bottom > 0 && r.top < (window.innerHeight || 0) + 40;
+    };
+    const sync = () => ((onScreen() && !document.hidden) ? start() : stop());
+    window.addEventListener('scroll', sync, { passive: true });
+    window.addEventListener('resize', sync);
+    document.addEventListener('visibilitychange', sync);
+    sync();
   }
 
   return { start, stop };
