@@ -386,7 +386,7 @@ body.dock-on .demo-pill{bottom:92px}
 .sb-row{display:grid; grid-template-columns:4px 1fr auto auto auto; align-items:center; gap:9px; padding:8px 10px 8px 0; border-bottom:1px solid rgba(255,255,255,.07); transition:background .3s}
 .sb-row .sb-flag{width:4px; align-self:stretch; border-radius:0 3px 3px 0}
 .sb-row[data-team="o"] .sb-flag{background:linear-gradient(180deg,#FF8A2B,#D9540F); box-shadow:0 0 14px rgba(243,108,33,.6)}
-.sb-row[data-team="w"] .sb-flag{background:linear-gradient(180deg,#D8D6D1,#8B8A87)}
+.sb-row[data-team="w"] .sb-flag{background:linear-gradient(180deg,#5C9BFF,#1E4F93); box-shadow:0 0 14px rgba(70,140,255,.45)}
 .sb-name{font-family:var(--display); font-weight:800; font-size:17px; letter-spacing:.06em; text-transform:uppercase; color:#fff; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
 .sb-bags{display:flex; gap:3px}
 .sb-bags i{width:11px; height:11px; border-radius:3px; border:1px solid rgba(255,255,255,.22); transition:background .25s, box-shadow .25s, border-color .25s, transform .25s}

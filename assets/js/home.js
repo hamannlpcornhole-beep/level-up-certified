@@ -51,7 +51,6 @@ const popLayer = document.getElementById('popLayer');
 const sb = document.getElementById('scorebug');
 const TEAMS = { o: 'Level Up', w: 'Challengers' };
 const sbq = (sel) => (sb ? sb.querySelector(sel) : null);
-let bagCount = { o: 0, w: 0 };
 
 function setShot(text) {
   const el = sbq('[data-sb="shot"]');
@@ -72,7 +71,6 @@ function setScore(team, value) {
 }
 
 function resetBugRound(round) {
-  bagCount = { o: 0, w: 0 };
   const r = sbq('[data-sb="round"]');
   if (r) r.textContent = String(round);
   ['o', 'w'].forEach((t) => {
@@ -104,8 +102,13 @@ if (hero && canvas && webglOk()) {
       container: hero,
       logoUrl: url('assets/img/logo.png'),
       onReady: () => hero.classList.add('has-3d'),
-      onRound: ({ phase, round, winner, diff, match, gameOver }) => {
-        if (phase === 'start') { resetBugRound(round); setShot('Round under way'); return; }
+      onRound: ({ phase, round, winner, diff, match }) => {
+        if (phase === 'start') {
+          resetBugRound(round);
+          setScore('o', match.o); setScore('w', match.w);
+          setShot(round === 1 ? 'New game. First to 21.' : 'Round under way');
+          return;
+        }
         if (phase === 'end') {
           if (winner) {
             setScore(winner, match[winner]);
@@ -116,29 +119,26 @@ if (hero && canvas && webglOk()) {
           } else {
             setShot('Wash. Nobody scores.');
           }
-          if (gameOver) return;
           return;
         }
         if (phase === 'game') {
           setShot(`Game. ${TEAMS[winner]} takes it.`);
           const r = hero.getBoundingClientRect();
           pop('Game!', r.width * (r.width > 980 ? 0.62 : 0.5), r.height * (r.width > 980 ? 0.42 : 0.3), true);
-          setTimeout(() => { setScore('o', 0); setScore('w', 0); setShot('New game. First to 21.'); }, 2600);
         }
       },
-      onScore: ({ team, pts, kind, shot, roundPts, screen }) => {
-        const dots = sb?.querySelectorAll(`[data-bags="${team}"] i`);
-        const dot = dots && dots[bagCount[team]];
-        if (dot) dot.className = kind;
-        bagCount[team] = Math.min(3, bagCount[team] + 1);
-        const ptsEl = sbq(`[data-pts="${team}"]`);
-        if (ptsEl) ptsEl.textContent = String(roundPts[team]);
-        setShot(`${TEAMS[team]} ${shot}${pts ? ` +${pts}` : ' no score'}`);
-        if (pts) pop(`+${pts}`, screen.x, screen.y, kind === 'in');
+      onScore: ({ team, pts, shot, roundPts, bags, pop: popText, screen, big }) => {
+        ['o', 'w'].forEach((t) => {
+          sb?.querySelectorAll(`[data-bags="${t}"] i`).forEach((dot, k) => { dot.className = (bags && bags[t][k]) || ''; });
+          const ptsEl = sbq(`[data-pts="${t}"]`);
+          if (ptsEl && roundPts) ptsEl.textContent = String(roundPts[t]);
+        });
+        if (shot) setShot(`${TEAMS[team]} ${shot}${pts > 0 ? ` +${pts}` : '. No score.'}`);
+        if (popText && screen) pop(popText, screen.x, screen.y, big);
       },
     });
     if (!api) hero.classList.remove('has-3d');
-  }).catch(() => { /* keep the photo fallback */ });
+  }).catch((err) => { console.warn('3D hero unavailable, keeping the photo', err); });
 }
 
 hydrateIcons(document);
